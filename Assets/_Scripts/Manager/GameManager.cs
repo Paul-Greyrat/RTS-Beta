@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class GameManager : SingertonManager<GameManager>
 {
+    [Header("UI")]
+    [SerializeField] private PointToClick m_PointToClickPrefabs;
     public Unit ActiveUnit;
     private Vector2 m_InitialTouchPosition;
     public bool hasActiveunit => ActiveUnit != null;
@@ -28,8 +31,8 @@ public class GameManager : SingertonManager<GameManager>
 
     public void DetectClick(Vector2 inputPosition)
     {
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(inputPosition);
-        RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
+        RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
         if (HasClickedOnUnit(hit, out Unit unit))
         {
@@ -37,7 +40,7 @@ public class GameManager : SingertonManager<GameManager>
         }
         else
         {
-            HandleClickOnGround(worldPosition);            
+            HandleClickOnGround(worldPoint);            
         }
     }
 
@@ -54,11 +57,25 @@ public class GameManager : SingertonManager<GameManager>
 
     public void HandleClickOnGround(Vector2 worldPoint)
     {
-        ActiveUnit.MoveTo(worldPoint);
+        if (hasActiveunit && IsHumannoid(ActiveUnit))
+        {
+
+        DisplayClickEffect(worldPoint);
+        ActiveUnit.MoveTo(worldPoint);     
+
+        }
     }
 
     public void HandleClickOnUnit(Unit unit)
     {
+        if (hasActiveunit)
+        {
+            if (HasClickedOnUnitActive(unit))
+            {
+                CancelActiveUnit();
+                return;
+            }
+        }
         SelectNewUnit(unit);
     }
 
@@ -70,5 +87,26 @@ public class GameManager : SingertonManager<GameManager>
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
+    }
+
+    public bool HasClickedOnUnitActive(Unit unit)
+    {
+        return hasActiveunit && ActiveUnit == unit;
+    }
+
+    public bool IsHumannoid(Unit unit)
+    {
+        return unit is HumanoidUnit;
+    }
+
+    public void CancelActiveUnit()
+    {
+        ActiveUnit.DeSelect();
+        ActiveUnit = null;
+    }
+
+    public void DisplayClickEffect(Vector2 worldPoint)
+    {
+        Instantiate(m_PointToClickPrefabs, (Vector3)worldPoint, Quaternion.identity);
     }
 }
