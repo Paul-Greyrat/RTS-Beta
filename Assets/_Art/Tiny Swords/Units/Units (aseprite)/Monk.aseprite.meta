@@ -1,0 +1,1067 @@
+fileFormatVersion: 2
+guid: a5d726735317a0b4aa80c153df41a821
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Monk_Frame_0
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.84057975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 899
+      width: 58
+      height: 69
+    spriteID: 51b0adda6214f75468f7039ff02dfb35
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 899}
+  - name: Monk_Frame_1
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8529412}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 405
+      width: 58
+      height: 68
+    spriteID: b2e444ba795400d479ce42e3d5d17ac1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 405}
+  - name: Monk_Frame_2
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8656717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 633
+      width: 58
+      height: 67
+    spriteID: 78fd54b8ed1a90840af49acb7f0961a4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 633}
+  - name: Monk_Frame_3
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8656717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 708
+      width: 58
+      height: 67
+    spriteID: ec7c9243e7dbb4a4abe2a9fd6c96eac4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 708}
+  - name: Monk_Frame_4
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8656717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 783
+      width: 58
+      height: 67
+    spriteID: d16019dd466119d41a799caa30b1b543
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 783}
+  - name: Monk_Frame_5
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8529412}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 481
+      width: 58
+      height: 68
+    spriteID: 6053623f8f4fe5b4e8cd8c474bb70b5b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 481}
+  - name: Monk_Frame_6
+    originalName: 
+    pivot: {x: 0.4938272, y: -0.84057975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 675
+      width: 81
+      height: 69
+    spriteID: a3fe62ede2731fd489d48a1eb7a31fb3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 675}
+  - name: Monk_Frame_7
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.81690145}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 517
+      width: 82
+      height: 71
+    spriteID: 8bb6a5ada37ac2d48a3a958cc9fedcdb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 517}
+  - name: Monk_Frame_8
+    originalName: 
+    pivot: {x: 0.4938272, y: -0.84057975}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 752
+      width: 81
+      height: 69
+    spriteID: 86b004c26b8b4994d9e201ca2d26ed7c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 752}
+  - name: Monk_Frame_9
+    originalName: 
+    pivot: {x: 0.4878049, y: -0.81690145}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 596
+      width: 82
+      height: 71
+    spriteID: 98a8f51020a28564085bde0925ca279f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 596}
+  - name: Monk_Frame_10
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8529412}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 557
+      width: 58
+      height: 68
+    spriteID: 1228455db2415a040b8f9c1967d83cd5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 557}
+  - name: Monk_Frame_11
+    originalName: 
+    pivot: {x: 0.4861111, y: -0.9354839}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 829
+      width: 72
+      height: 62
+    spriteID: 9782c95ce09eb724ea36ca95fa19c758
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 829}
+  - name: Monk_Frame_12
+    originalName: 
+    pivot: {x: 0.5049505, y: -0.920635}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 303
+      width: 101
+      height: 63
+    spriteID: e55f3c76d638a3d4eab37aeb082c3863
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 303}
+  - name: Monk_Frame_13
+    originalName: 
+    pivot: {x: 0.5045871, y: -0.90625}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 231
+      width: 109
+      height: 64
+    spriteID: 43b6f3d07f0e9f049bb3597700739191
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 231}
+  - name: Monk_Frame_14
+    originalName: 
+    pivot: {x: 0.50427353, y: -0.89230776}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 158
+      width: 117
+      height: 65
+    spriteID: f5137eb350a302542bd984b4adcd3a51
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 158}
+  - name: Monk_Frame_15
+    originalName: 
+    pivot: {x: 0.5041322, y: -0.8656717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 4
+      width: 121
+      height: 67
+    spriteID: dbdceb775d95b004499d778f651e273d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 4}
+  - name: Monk_Frame_16
+    originalName: 
+    pivot: {x: 0.5045871, y: -0.81690145}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 79
+      width: 109
+      height: 71
+    spriteID: ac9c17c75418eb9499d070b4f6d3aa1c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 79}
+  - name: Monk_Frame_17
+    originalName: 
+    pivot: {x: 0.51648355, y: -0.81690145}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 326
+      width: 91
+      height: 71
+    spriteID: 0b5e9831040720340a7507a9a25142f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 326}
+  - name: Monk_Frame_18
+    originalName: 
+    pivot: {x: 0.5106383, y: -0.90625}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 374
+      width: 94
+      height: 64
+    spriteID: 337eec34d8198194087cb6702f18c80c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 374}
+  - name: Monk_Frame_19
+    originalName: 
+    pivot: {x: 0.5106383, y: -0.920635}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 209
+      y: 446
+      width: 94
+      height: 63
+    spriteID: 7b0f39faa6c215a4d9b2069e24460553
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 209, y: 446}
+  - name: Monk_Frame_20
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.8656717}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 858
+      width: 58
+      height: 67
+    spriteID: b80facdf1ac1e964284186c5a8e73638
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 858}
+  - name: Monk_Frame_21
+    originalName: 
+    pivot: {x: 0.5568181, y: -0.7317073}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 236
+      width: 88
+      height: 82
+    spriteID: c289245f4bd83e54482a20b1b3d54f8f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 236}
+  - name: Monk_Frame_22
+    originalName: 
+    pivot: {x: 0.5384615, y: -0.43925232}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 4
+      width: 91
+      height: 107
+    spriteID: 71d63543fdc70e049b7d46387de12268
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 4}
+  - name: Monk_Frame_23
+    originalName: 
+    pivot: {x: 0.51578945, y: -0.4017094}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 668
+      width: 95
+      height: 117
+    spriteID: 6217823fe92b94e4c8d0e39430098e33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 668}
+  - name: Monk_Frame_24
+    originalName: 
+    pivot: {x: 0.5104166, y: -0.38016528}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 539
+      width: 96
+      height: 121
+    spriteID: a78644cdf002e9f4282a181d6d039b6f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 539}
+  - name: Monk_Frame_25
+    originalName: 
+    pivot: {x: 0.5051546, y: -0.37096772}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 276
+      width: 97
+      height: 124
+    spriteID: c50eda39b8c31d94ab5f321f366358a3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 276}
+  - name: Monk_Frame_26
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.359375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 98
+      height: 128
+    spriteID: eaa1a70febba8424d927d518be8aa1eb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Monk_Frame_27
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.359375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 140
+      width: 98
+      height: 128
+    spriteID: 85a111fb9c7facc4ba91099833456261
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 140}
+  - name: Monk_Frame_28
+    originalName: 
+    pivot: {x: 0.4895833, y: -0.3739837}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 408
+      width: 96
+      height: 123
+    spriteID: 396879aeb2afc9c43b322f870507ca0a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 408}
+  - name: Monk_Frame_29
+    originalName: 
+    pivot: {x: 0.48421055, y: -0.4122807}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 793
+      width: 95
+      height: 114
+    spriteID: cdd044d8f0b849a48acb96bf2e28df0c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 793}
+  - name: Monk_Frame_30
+    originalName: 
+    pivot: {x: 0.4302326, y: -0.49541286}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 119
+      width: 86
+      height: 109
+    spriteID: 71ae1586f37b87149b12bcf584a36603
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 119}
+  - name: Monk_Frame_31
+    originalName: 
+    pivot: {x: 0.43529415, y: -0.6907217}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 915
+      width: 85
+      height: 97
+    spriteID: 60c1316c05bf07b48a8d268367bf2ff1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 915}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 419098831
+    name: Monk
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Monk_Frame_0
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 69
+      spriteId: 51b0adda6214f75468f7039ff02dfb35
+    - name: Monk_Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 68
+      spriteId: b2e444ba795400d479ce42e3d5d17ac1
+    - name: Monk_Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 67
+      spriteId: 78fd54b8ed1a90840af49acb7f0961a4
+    - name: Monk_Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 67
+      spriteId: ec7c9243e7dbb4a4abe2a9fd6c96eac4
+    - name: Monk_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 67
+      spriteId: d16019dd466119d41a799caa30b1b543
+    - name: Monk_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 68
+      spriteId: 6053623f8f4fe5b4e8cd8c474bb70b5b
+    - name: Monk_Frame_6
+      frameIndex: 6
+      additiveSortOrder: 0
+      cellRect:
+        x: 56
+        y: 58
+        width: 81
+        height: 69
+      spriteId: a3fe62ede2731fd489d48a1eb7a31fb3
+    - name: Monk_Frame_7
+      frameIndex: 7
+      additiveSortOrder: 0
+      cellRect:
+        x: 55
+        y: 58
+        width: 82
+        height: 71
+      spriteId: 8bb6a5ada37ac2d48a3a958cc9fedcdb
+    - name: Monk_Frame_8
+      frameIndex: 8
+      additiveSortOrder: 0
+      cellRect:
+        x: 56
+        y: 58
+        width: 81
+        height: 69
+      spriteId: 86b004c26b8b4994d9e201ca2d26ed7c
+    - name: Monk_Frame_9
+      frameIndex: 9
+      additiveSortOrder: 0
+      cellRect:
+        x: 56
+        y: 58
+        width: 82
+        height: 71
+      spriteId: 98a8f51020a28564085bde0925ca279f
+    - name: Monk_Frame_10
+      frameIndex: 10
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 68
+      spriteId: 1228455db2415a040b8f9c1967d83cd5
+    - name: Monk_Frame_11
+      frameIndex: 11
+      additiveSortOrder: 0
+      cellRect:
+        x: 61
+        y: 58
+        width: 72
+        height: 62
+      spriteId: 9782c95ce09eb724ea36ca95fa19c758
+    - name: Monk_Frame_12
+      frameIndex: 12
+      additiveSortOrder: 0
+      cellRect:
+        x: 45
+        y: 58
+        width: 101
+        height: 63
+      spriteId: e55f3c76d638a3d4eab37aeb082c3863
+    - name: Monk_Frame_13
+      frameIndex: 13
+      additiveSortOrder: 0
+      cellRect:
+        x: 41
+        y: 58
+        width: 109
+        height: 64
+      spriteId: 43b6f3d07f0e9f049bb3597700739191
+    - name: Monk_Frame_14
+      frameIndex: 14
+      additiveSortOrder: 0
+      cellRect:
+        x: 37
+        y: 58
+        width: 117
+        height: 65
+      spriteId: f5137eb350a302542bd984b4adcd3a51
+    - name: Monk_Frame_15
+      frameIndex: 15
+      additiveSortOrder: 0
+      cellRect:
+        x: 35
+        y: 58
+        width: 121
+        height: 67
+      spriteId: dbdceb775d95b004499d778f651e273d
+    - name: Monk_Frame_16
+      frameIndex: 16
+      additiveSortOrder: 0
+      cellRect:
+        x: 41
+        y: 58
+        width: 109
+        height: 71
+      spriteId: ac9c17c75418eb9499d070b4f6d3aa1c
+    - name: Monk_Frame_17
+      frameIndex: 17
+      additiveSortOrder: 0
+      cellRect:
+        x: 49
+        y: 58
+        width: 91
+        height: 71
+      spriteId: 0b5e9831040720340a7507a9a25142f1
+    - name: Monk_Frame_18
+      frameIndex: 18
+      additiveSortOrder: 0
+      cellRect:
+        x: 48
+        y: 58
+        width: 94
+        height: 64
+      spriteId: 337eec34d8198194087cb6702f18c80c
+    - name: Monk_Frame_19
+      frameIndex: 19
+      additiveSortOrder: 0
+      cellRect:
+        x: 48
+        y: 58
+        width: 94
+        height: 63
+      spriteId: 7b0f39faa6c215a4d9b2069e24460553
+    - name: Monk_Frame_20
+      frameIndex: 20
+      additiveSortOrder: 0
+      cellRect:
+        x: 67
+        y: 58
+        width: 58
+        height: 67
+      spriteId: b80facdf1ac1e964284186c5a8e73638
+    - name: Monk_Frame_21
+      frameIndex: 21
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 60
+        width: 88
+        height: 82
+      spriteId: c289245f4bd83e54482a20b1b3d54f8f
+    - name: Monk_Frame_22
+      frameIndex: 22
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 47
+        width: 91
+        height: 107
+      spriteId: 71d63543fdc70e049b7d46387de12268
+    - name: Monk_Frame_23
+      frameIndex: 23
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 47
+        width: 95
+        height: 117
+      spriteId: 6217823fe92b94e4c8d0e39430098e33
+    - name: Monk_Frame_24
+      frameIndex: 24
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 46
+        width: 96
+        height: 121
+      spriteId: a78644cdf002e9f4282a181d6d039b6f
+    - name: Monk_Frame_25
+      frameIndex: 25
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 46
+        width: 97
+        height: 124
+      spriteId: c50eda39b8c31d94ab5f321f366358a3
+    - name: Monk_Frame_26
+      frameIndex: 26
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 46
+        width: 98
+        height: 128
+      spriteId: eaa1a70febba8424d927d518be8aa1eb
+    - name: Monk_Frame_27
+      frameIndex: 27
+      additiveSortOrder: 0
+      cellRect:
+        x: 47
+        y: 46
+        width: 98
+        height: 128
+      spriteId: 85a111fb9c7facc4ba91099833456261
+    - name: Monk_Frame_28
+      frameIndex: 28
+      additiveSortOrder: 0
+      cellRect:
+        x: 49
+        y: 46
+        width: 96
+        height: 123
+      spriteId: 396879aeb2afc9c43b322f870507ca0a
+    - name: Monk_Frame_29
+      frameIndex: 29
+      additiveSortOrder: 0
+      cellRect:
+        x: 50
+        y: 47
+        width: 95
+        height: 114
+      spriteId: cdd044d8f0b849a48acb96bf2e28df0c
+    - name: Monk_Frame_30
+      frameIndex: 30
+      additiveSortOrder: 0
+      cellRect:
+        x: 59
+        y: 54
+        width: 86
+        height: 109
+      spriteId: 71ae1586f37b87149b12bcf584a36603
+    - name: Monk_Frame_31
+      frameIndex: 31
+      additiveSortOrder: 0
+      cellRect:
+        x: 59
+        y: 67
+        width: 85
+        height: 97
+      spriteId: 60c1316c05bf07b48a8d268367bf2ff1
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 192, y: 192}

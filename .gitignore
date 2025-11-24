@@ -1,0 +1,88 @@
+# Unity .gitignore standard template
+
+# ----------------------------------------------------------------------
+# Unity Generated Files (Unity Tự động tạo)
+# ----------------------------------------------------------------------
+
+# Thư mục chứa các file nhị phân, cache và dữ liệu tạm thời
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/DerivedDataCache/
+
+# Thư mục Build của bạn
+# (Nếu bạn đặt thư mục build ở tên khác, hãy thêm nó vào đây)
+/ExportedProject/
+
+# File Debug/Profiling
+*.pdb
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.vspscc
+*.vssscc
+
+# Logs
+*.log
+
+# Caching/Temporary files
+.vs/
+.vscode/
+
+# ----------------------------------------------------------------------
+# Cài đặt Dự án Cục Bộ và Phiên bản (Local Project Settings and Versions)
+# ----------------------------------------------------------------------
+
+# Giữ lại ProjectSettings/FolderSettings.asset và ProjectSettings/QualitySettings.asset
+# Nhưng bỏ qua ProjectVersion.txt (thường thay đổi khi Unity nâng cấp tự động)
+# và các cài đặt Editor cục bộ.
+/ProjectSettings/ProjectVersion.txt
+/ProjectSettings/EditorSettings.asset
+
+# Package cache
+/Packages/manifest.json.meta
+/Packages/packages-lock.json
+
+# Packages bên ngoài (tùy chọn)
+# Nếu bạn dùng Package Manager để quản lý các asset store package,
+# hãy đảm bảo bạn chỉ commit các file cần thiết.
+# Assets/AssetStoreTools/
+
+# ----------------------------------------------------------------------
+# Tác vụ của Engine/Hệ điều hành
+# ----------------------------------------------------------------------
+
+# Asset Store Tools
+# Assets/AssetStoreTools/
+
+# Các file tạm thời của Mac
+.DS_Store
+
+# Các file tạm thời của Windows
+Thumbs.db
+desktop.ini
+
+# Files/Folders của JetBrains Rider
+.idea/
+
+# Thư mục crash reports của Unity
+CrashReports/
+
+# ----------------------------------------------------------------------
+# Compiled/Exported Assets (Sản phẩm đã biên dịch/xuất ra)
+# ----------------------------------------------------------------------
+
+# Exported Packages
+*.unitypackage
+
+# Các file tạo ra bởi công cụ CI/CD
+*.zip
+*.tar
+*.gz
+
+# Các file/thư mục khác mà bạn muốn bỏ qua
+# (Ví dụ: Thư mục chứa các file nguồn đồ họa lớn như .blend, .psd nếu bạn không muốn commit chúng)
+# SourceAssets/
