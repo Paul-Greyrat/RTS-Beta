@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : SingertonManager<GameManager>
 {
@@ -10,7 +11,9 @@ public class GameManager : SingertonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
     public Unit ActiveUnit;
-    private Vector2 m_InitialTouchPosition;
+    private PlacementProcess m_PlacementProcess;
+
+
     public bool hasActiveunit => ActiveUnit != null;
 
     public void Start()
@@ -20,23 +23,30 @@ public class GameManager : SingertonManager<GameManager>
 
     public void Update()
     {
-        Vector2 inputPosition = Input.touchCount > 0 ? Input.GetTouch(0).position : Input.mousePosition;
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            m_InitialTouchPosition = inputPosition;
-        }
 
-        if (Input.GetMouseButtonUp(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if (m_PlacementProcess != null)
         {
-            if (Vector2.Distance(m_InitialTouchPosition, inputPosition) < 10f)
-            {
-                DetectClick(inputPosition);
-            }
+            m_PlacementProcess.Update();
         }
+        else if (GreyUtils.TryGetShotClickposition(out Vector2 inputPosition))
+        {
+            DetectClick(inputPosition);
+        }
+    }
+
+    public void StartBuidProcess(BuildActionSO buildAction)
+    {
+        m_PlacementProcess = new PlacementProcess(buildAction);
+        m_PlacementProcess.ShowPlacementOutLine();
     }
 
     public void DetectClick(Vector2 inputPosition)
     {
+
+        if (GreyUtils.IsPointerOverUiElement())
+        {
+            return;
+        }
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
@@ -46,7 +56,7 @@ public class GameManager : SingertonManager<GameManager>
         }
         else
         {
-            HandleClickOnGround(worldPoint);            
+            HandleClickOnGround(worldPoint);
         }
     }
 
@@ -66,8 +76,8 @@ public class GameManager : SingertonManager<GameManager>
         if (hasActiveunit && IsHumannoid(ActiveUnit))
         {
 
-        DisplayClickEffect(worldPoint);
-        ActiveUnit.MoveTo(worldPoint);     
+            DisplayClickEffect(worldPoint);
+            ActiveUnit.MoveTo(worldPoint);
 
         }
     }
@@ -85,7 +95,7 @@ public class GameManager : SingertonManager<GameManager>
         SelectNewUnit(unit);
     }
 
-    public void SelectNewUnit( Unit unit)
+    public void SelectNewUnit(Unit unit)
     {
         if (hasActiveunit)
         {
@@ -93,7 +103,7 @@ public class GameManager : SingertonManager<GameManager>
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
-        ShowUnitAction();
+        ShowUnitAction(unit);
     }
 
     public bool HasClickedOnUnitActive(Unit unit)
@@ -110,6 +120,7 @@ public class GameManager : SingertonManager<GameManager>
     {
         ActiveUnit.DeSelect();
         ActiveUnit = null;
+        ClearActionBarUI();
     }
 
     public void DisplayClickEffect(Vector2 worldPoint)
@@ -117,16 +128,21 @@ public class GameManager : SingertonManager<GameManager>
         Instantiate(m_PointToClickPrefabs, (Vector3)worldPoint, Quaternion.identity);
     }
 
-    public void ShowUnitAction()
+    public void ShowUnitAction(Unit unit)
     {
         ClearActionBarUI();
-        var hardcodedAction = 2;
 
-        for (int i = 0; i < hardcodedAction; i++)
-        {
-            m_ActionBar.RegisterAction();
-        }
+        if (unit.Actions.Length == 0) return;
+
         m_ActionBar.Show();
+
+        foreach (var action in unit.Actions)
+        {
+            m_ActionBar.RegisterAction(
+                action.Icon,
+                () => action.Execute(this)
+            );
+        }
     }
 
     public void ClearActionBarUI()
@@ -134,4 +150,6 @@ public class GameManager : SingertonManager<GameManager>
         m_ActionBar.ClearActions();
         m_ActionBar.Hiden();
     }
+
+
 }

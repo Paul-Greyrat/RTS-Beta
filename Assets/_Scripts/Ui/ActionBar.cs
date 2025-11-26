@@ -1,7 +1,9 @@
 
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ActionBar : MonoBehaviour
@@ -15,14 +17,14 @@ public class ActionBar : MonoBehaviour
     private void Awake()
     {
         m_originalColor = m_BackgroundImage.color;
-        Hiden();
 
     }
 
-    public void RegisterAction()
+    public void RegisterAction(Sprite icon, UnityAction action)
     {
         var actionButton = Instantiate(m_ActionButtonPrefab, transform);
-        actionButton.transform.SetParent(transform);
+        actionButton.Init(icon, action);
+        m_ActionButtons.Add(actionButton);
     }
 
     public void ClearActions()

@@ -65,13 +65,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Unit\Unit.cs" />
+    <Compile Include="Assets\_Scripts\Utils\GreyUtils.cs" />
     <Compile Include="Assets\_Scripts\Manager\SingertonManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Utils\PlacementProcess.cs" />
     <Compile Include="Assets\_Scripts\AI\AiPawn.cs" />
+    <Compile Include="Assets\_Scripts\Unit\Actions\BuildActionSO.cs" />
     <Compile Include="Assets\_Scripts\Ui\ActionButton.cs" />
     <Compile Include="Assets\_Scripts\Ui\PointToClick.cs" />
     <Compile Include="Assets\_Scripts\Unit\HumanoidUnit.cs" />
     <Compile Include="Assets\_Scripts\Ui\ActionBar.cs" />
+    <Compile Include="Assets\_Scripts\Unit\Actions\ActionSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

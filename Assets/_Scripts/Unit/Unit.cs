@@ -4,14 +4,19 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
-    public bool isMoving;
 
+    [SerializeField] private ActionSO[] m_Actions;
+
+    public bool isMoving;
+    public bool IsTargeted;
     protected Animator m_Animator;
     protected AiPawn m_Aipawn;
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
     private Material m_HighlightMaterial;
-    protected bool IsTargeted;
+
+    public ActionSO[] Actions => m_Actions;
+
     protected virtual void Awake()
     {
 
