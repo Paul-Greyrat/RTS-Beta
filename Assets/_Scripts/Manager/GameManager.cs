@@ -8,9 +8,15 @@ public class GameManager : SingertonManager<GameManager>
 {
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefabs;
+    [SerializeField] private ActionBar m_ActionBar;
     public Unit ActiveUnit;
     private Vector2 m_InitialTouchPosition;
     public bool hasActiveunit => ActiveUnit != null;
+
+    public void Start()
+    {
+        ClearActionBarUI();
+    }
 
     public void Update()
     {
@@ -87,6 +93,7 @@ public class GameManager : SingertonManager<GameManager>
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
+        ShowUnitAction();
     }
 
     public bool HasClickedOnUnitActive(Unit unit)
@@ -108,5 +115,23 @@ public class GameManager : SingertonManager<GameManager>
     public void DisplayClickEffect(Vector2 worldPoint)
     {
         Instantiate(m_PointToClickPrefabs, (Vector3)worldPoint, Quaternion.identity);
+    }
+
+    public void ShowUnitAction()
+    {
+        ClearActionBarUI();
+        var hardcodedAction = 2;
+
+        for (int i = 0; i < hardcodedAction; i++)
+        {
+            m_ActionBar.RegisterAction();
+        }
+        m_ActionBar.Show();
+    }
+
+    public void ClearActionBarUI()
+    {
+        m_ActionBar.ClearActions();
+        m_ActionBar.Hiden();
     }
 }
