@@ -7,6 +7,7 @@ public class PlacementProcess
 {
     private GameObject m_PlacementOutLine;
     public BuildActionSO m_BuildAction;
+    public Vector3 m_HighlightPosition;
 
     public PlacementProcess(BuildActionSO buildAction)
     {
@@ -33,5 +34,10 @@ public class PlacementProcess
     Vector3 SnapToGrid(Vector3 worldposition)
     {
         return new Vector3(Mathf.Round(worldposition.x), Mathf.Round(worldposition.y), 0);
+    }
+
+    void HighlightTiles()
+    {
+        
     }
 }

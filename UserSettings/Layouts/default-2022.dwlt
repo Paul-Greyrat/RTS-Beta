@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 119
+  controlID: 127
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 28
+  controlID: 20
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 74
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -300,8 +300,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -406,9 +406,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: ae799a2cec0c08543884593110a7667d, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 7897e2636ea461d4ea070de28a20e611, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1947442224161874573, guid: ae799a2cec0c08543884593110a7667d, type: 2}
+  - m_Target: {fileID: 4641022990496404183, guid: 7897e2636ea461d4ea070de28a20e611, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -457,7 +457,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28938
+  m_LastSelectedObjectID: 28870
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1030,9 +1030,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.7775887, y: -0.43879363, z: -0.038820032}
+    m_Target: {x: -0.5463362, y: -3.290434, z: 0.009403091}
     speed: 2
-    m_Value: {x: 0.7775887, y: -0.43879363, z: -0.038820032}
+    m_Value: {x: -0.5463362, y: -3.290434, z: 0.009403091}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1082,9 +1082,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.005669
+    m_Target: 9.059718
     speed: 2
-    m_Value: 6.005669
+    m_Value: 9.059718
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1146,9 +1146,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ba710000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 02fbffff
+      m_ExpandedIDs: 14fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1216,8 +1216,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Prefabs/UI
+    m_Folders: []
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1233,7 +1232,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0230000
     m_LastClickedID: 9136
-    m_ExpandedIDs: 00000000b6710000da710000dc710000ee71000066730000687300006a7300006c7300006e73000070730000727300007473000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000
+    m_ExpandedIDs: 00000000c2710000e0710000e2710000ea710000ec710000fe71000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1258,10 +1257,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 361}
+    scrollPos: {x: 0, y: 112}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000b6710000da710000dc710000ee710000667300006a7300006c7300006e730000707300007273000074730000787300007a7300007c730000807300008473000086730000887300008c7300008e73000090730000967300003e760000787600004c7700006c77000070770000587e00005a7e0000907e00005c8c0000
+    m_ExpandedIDs: ffffffff00000000c2710000e0710000e2710000ea710000ec710000fe71000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
