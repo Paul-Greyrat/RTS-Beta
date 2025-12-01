@@ -1,12 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
+
+
+
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class GameManager : SingertonManager<GameManager>
 {
+    [Header("Tilemap")]
+    [SerializeField] private Tilemap m_WalkableTilemap;
+    [SerializeField] private Tilemap m_OverlayTilemap;
+    [SerializeField] private Tilemap[] m_UnreachableTilemap;
+
+
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
@@ -36,7 +42,12 @@ public class GameManager : SingertonManager<GameManager>
 
     public void StartBuidProcess(BuildActionSO buildAction)
     {
-        m_PlacementProcess = new PlacementProcess(buildAction);
+        m_PlacementProcess = new PlacementProcess(
+            buildAction,
+            m_WalkableTilemap,
+            m_OverlayTilemap,
+            m_UnreachableTilemap
+            );
         m_PlacementProcess.ShowPlacementOutLine();
     }
 
