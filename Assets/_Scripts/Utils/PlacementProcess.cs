@@ -1,7 +1,8 @@
 
 
 
-    
+
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -105,7 +106,10 @@ public class PlacementProcess
 
     bool CanPlaceTile(Vector3Int TilePos)
     {
-        return m_WalkableTilemap.HasTile(TilePos) && !IsInUnreachableTilemap(TilePos);
+        return 
+            m_WalkableTilemap.HasTile(TilePos) &&
+            !IsInUnreachableTilemap(TilePos) &&
+            !IsBlockedByGameobject(TilePos);
     }
 
     bool IsInUnreachableTilemap(Vector3Int TilePos)
@@ -116,5 +120,22 @@ public class PlacementProcess
         }
 
         return false;
+    }
+
+    bool IsBlockedByGameobject(Vector3Int TilePos)
+    {
+        Vector3 tileSize = m_WalkableTilemap.cellSize;
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(TilePos + tileSize / 2, tileSize * 0.9f, 0);
+
+        foreach (var collider in colliders)
+        {
+            var layer = collider.gameObject.layer;
+            if ( layer == LayerMask.NameToLayer("Player"))
+            {
+                return true;
+            }
+        }
+
+        return false;  
     }
 }
