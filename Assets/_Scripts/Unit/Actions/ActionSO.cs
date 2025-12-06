@@ -10,3 +10,5 @@ public abstract class ActionSO : ScriptableObject
 
     public abstract void Execute(GameManager manager);    
 }
+
+
