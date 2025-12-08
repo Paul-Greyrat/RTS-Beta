@@ -38,10 +38,18 @@ public class PlacementProcess
             HighlightTiles(m_PlacementOutLine.transform.position);
         }
 
+        if (GreyUtils.IsPointerOverUiElement()) return;
+
         if (GreyUtils.TryGetHoldPosition(out Vector3 worldPosition))
         {
             m_PlacementOutLine.transform.position = SnapToGrid(worldPosition);
         }
+    }
+
+    public void Cleanup()
+    {
+        ClearHightlight();
+        Object.Destroy(m_PlacementOutLine);
     }
 
     public void ShowPlacementOutLine()

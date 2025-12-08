@@ -16,8 +16,10 @@ public class GameManager : SingertonManager<GameManager>
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
+    [SerializeField] private ConfirmationBar m_ConfirmationBar;
     public Unit ActiveUnit;
     private PlacementProcess m_PlacementProcess;
+
 
 
     public bool hasActiveunit => ActiveUnit != null;
@@ -42,6 +44,8 @@ public class GameManager : SingertonManager<GameManager>
 
     public void StartBuidProcess(BuildActionSO buildAction)
     {
+        if (m_PlacementProcess != null) return;
+
         m_PlacementProcess = new PlacementProcess(
             buildAction,
             m_WalkableTilemap,
@@ -49,6 +53,8 @@ public class GameManager : SingertonManager<GameManager>
             m_UnreachableTilemap
             );
         m_PlacementProcess.ShowPlacementOutLine();
+        m_ConfirmationBar.Show();
+        m_ConfirmationBar.SetupHooks(ConfirmBuildPlacement, CancelBuildPlacement);
     }
 
     public void DetectClick(Vector2 inputPosition)
@@ -161,6 +167,18 @@ public class GameManager : SingertonManager<GameManager>
         m_ActionBar.ClearActions();
         m_ActionBar.Hiden();
     }
+
+    public void ConfirmBuildPlacement()
+    {
+        Debug.Log("Confirm Build Placement");
+    }
+    public void CancelBuildPlacement()
+    {
+        m_ConfirmationBar.Hide();
+        m_PlacementProcess.Cleanup();
+        m_PlacementProcess = null;
+    }
+
 
 
 }
