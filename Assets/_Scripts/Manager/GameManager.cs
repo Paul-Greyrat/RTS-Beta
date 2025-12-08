@@ -20,6 +20,11 @@ public class GameManager : SingertonManager<GameManager>
     public Unit ActiveUnit;
     private PlacementProcess m_PlacementProcess;
 
+    private int m_gold = 50;
+    private int m_wood = 50;
+    public int Gold => m_gold;
+    public int Wood => m_wood;
+
 
 
     public bool hasActiveunit => ActiveUnit != null;
@@ -170,7 +175,28 @@ public class GameManager : SingertonManager<GameManager>
 
     public void ConfirmBuildPlacement()
     {
-        Debug.Log("Confirm Build Placement");
+        if (!TryDeductResources(m_PlacementProcess.goldCost, m_PlacementProcess.woodCost))
+        {
+            Debug.Log("Not enough resources to build");
+            return;
+        }
+
+        if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildposition))
+        {
+            m_ConfirmationBar.Hide();
+            m_PlacementProcess = null;
+            Debug.Log("Building at position: " + buildposition);
+        }
+        else
+        {
+            RevertResources(m_PlacementProcess.goldCost, m_PlacementProcess.woodCost);
+        }
+    }
+
+    public void RevertResources(int goldAmount, int woodAmount)
+    {
+        m_gold += goldAmount;
+        m_wood += woodAmount;
     }
     public void CancelBuildPlacement()
     {
@@ -179,6 +205,22 @@ public class GameManager : SingertonManager<GameManager>
         m_PlacementProcess = null;
     }
 
+    bool TryDeductResources(int goldCost, int woodCost)
+    {
+        if (m_gold >= goldCost && m_wood >= woodCost)
+        {
+            m_gold -= goldCost;
+            m_wood -= woodCost;
+            return true;
+        }
 
+        return false;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(20, 40, 200, 20), "Gold: " + m_gold);
+        GUI.Label(new Rect(20, 80, 200, 20), "Wood: " + m_wood);
+    }
 
 }

@@ -15,10 +15,15 @@ public class PlacementProcess
     private Tilemap m_OverlayTilemap;
     private Tilemap[] m_UnreachableTilemap;
 
+    private Sprite m_PlacehoderTileSprite;
+
     private Color m_HightlightColor = new Color(0, 0.8f, 1, 0.4f);
     private Color m_BlockColor = new Color(1, 0.2f, 0, 0.8f);
 
-    private Sprite m_PlacehoderTileSprite;
+    public BuildActionSO BuildAction => m_BuildAction;
+
+    public int woodCost => m_BuildAction.WoodCost;
+    public int goldCost => m_BuildAction.GoldCost;
 
 
 
@@ -50,6 +55,34 @@ public class PlacementProcess
     {
         ClearHightlight();
         Object.Destroy(m_PlacementOutLine);
+    }
+
+    public bool TryFinalizePlacement(out Vector3 buildposition)
+    {
+        if (IsPlacementvalid())
+        {
+            ClearHightlight();
+            buildposition = m_PlacementOutLine.transform.position;
+            Object.Destroy(m_PlacementOutLine);
+            return true;
+        }
+
+        Debug.Log("Placement invalid");
+        buildposition = Vector3.zero;
+        return false;
+    }
+
+    public bool IsPlacementvalid()
+    {
+        foreach (var tilePos in m_HighlightPosition)
+        {
+            if (!CanPlaceTile(tilePos))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void ShowPlacementOutLine()
