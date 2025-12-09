@@ -58,7 +58,7 @@ public class GameManager : SingertonManager<GameManager>
             m_UnreachableTilemap
             );
         m_PlacementProcess.ShowPlacementOutLine();
-        m_ConfirmationBar.Show();
+        m_ConfirmationBar.Show( buildAction.GoldCost, buildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildPlacement, CancelBuildPlacement);
     }
 
@@ -184,8 +184,13 @@ public class GameManager : SingertonManager<GameManager>
         if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildposition))
         {
             m_ConfirmationBar.Hide();
+            new Buildingprocess(
+                m_PlacementProcess.BuildAction,
+                buildposition
+            );
+
+            ActiveUnit.MoveTo(buildposition);
             m_PlacementProcess = null;
-            Debug.Log("Building at position: " + buildposition);
         }
         else
         {

@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class BuildActionSO : ActionSO
 {
+    [SerializeField] private StructureUnit m_Structureprefab;
     [SerializeField] private Sprite m_PlacementSprite;
     [SerializeField] private Sprite m_FoundationSprite;
     [SerializeField] private Sprite m_CompletionSprite;
@@ -18,6 +19,8 @@ public class BuildActionSO : ActionSO
     [SerializeField] private int m_GoldCost;
     [SerializeField] private int m_WoodCost;
 
+
+    public StructureUnit StructurePrefab => m_Structureprefab;
     public Sprite PlacementSprite => m_PlacementSprite;
     public Sprite FoundationSprite => m_FoundationSprite;
     public Sprite CompletionSprite => m_CompletionSprite;

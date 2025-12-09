@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ConfirmationBar : MonoBehaviour
 {
+
+    [SerializeField] private ResourceRequirementDisplay m_ResourceDisplay;
     [SerializeField] private Button m_ConfirmButton;
     [SerializeField] private Button m_CancelButton;
 
@@ -19,9 +21,10 @@ public class ConfirmationBar : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show()
+    public void Show( int reqGold, int reqWood)
     {
         gameObject.SetActive(true);
+        m_ResourceDisplay.Show(reqGold, reqWood);
     }
 
     public void SetupHooks(System.Action onConfirm, System.Action onCancel)
