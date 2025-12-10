@@ -186,10 +186,10 @@ public class GameManager : SingertonManager<GameManager>
             m_ConfirmationBar.Hide();
             new Buildingprocess(
                 m_PlacementProcess.BuildAction,
-                buildposition
+                buildposition,
+                (WorkerUnit)ActiveUnit
             );
 
-            ActiveUnit.MoveTo(buildposition);
             m_PlacementProcess = null;
         }
         else
@@ -224,8 +224,14 @@ public class GameManager : SingertonManager<GameManager>
 
     void OnGUI()
     {
-        GUI.Label(new Rect(20, 40, 200, 20), "Gold: " + m_gold);
-        GUI.Label(new Rect(20, 80, 200, 20), "Wood: " + m_wood);
+        GUI.Label(new Rect(20, 40, 200, 20), "Gold: " + m_gold.ToString(), new GUIStyle { fontSize = 30 });
+        GUI.Label(new Rect(20, 80, 200, 20), "Wood: " + m_wood.ToString(), new GUIStyle { fontSize = 30 });
+
+        if (ActiveUnit != null)
+        {
+            GUI.Label(new Rect(20, 120, 200, 20), "State: " + ActiveUnit.CurrentState.ToString(), new GUIStyle { fontSize = 30 });
+            GUI.Label(new Rect(20, 160, 200, 20), "task: " + ActiveUnit.CurrentTask.ToString(), new GUIStyle { fontSize = 30 });
+        }
     }
 
 }

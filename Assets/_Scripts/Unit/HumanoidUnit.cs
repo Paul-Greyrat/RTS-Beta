@@ -18,13 +18,26 @@ public class HumanoidUnit : Unit
 
     protected void Update()
     {
+        UpdateVeVelocity();
+        
+        UpdateBehavior();
+    }
+    protected virtual void UpdateBehavior()
+    {
+        
+    }
+
+    protected virtual void UpdateVeVelocity()
+    {
         m_velocity = new Vector2(
             (transform.position.x - m_LastPosition.x),
             (transform.position.z - m_LastPosition.z)
         ) / Time.deltaTime;
 
         m_LastPosition = transform.position;
-        isMoving = m_velocity.magnitude > 0;
-        m_Animator.SetFloat("Speed", Mathf.Clamp01(CurrentSpeed));
+        var state = m_velocity.magnitude > 0 ? UnitState.Moving : UnitState.Idle;
+        SetState(state);
+        
+        m_Animator?.SetFloat("Speed", Mathf.Clamp01(CurrentSpeed));
     }
 }

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class StructureUnit : Unit
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Buildingprocess m_Buildingprocess;
 
-    // Update is called once per frame
+    public bool IsUnderConstruction => m_Buildingprocess != null;
+
     void Update()
     {
-        
+        if (IsUnderConstruction)
+        {
+            m_Buildingprocess.Update();
+            
+        }
+    }
+
+    public void ResgisterProcess(Buildingprocess process)
+    {
+        m_Buildingprocess = process;
     }
 }
