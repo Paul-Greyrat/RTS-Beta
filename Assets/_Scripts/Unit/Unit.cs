@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    Idle, Moving, Attacking, Chopping, minig
+    Idle, Moving, Attacking, Chopping, minig, Building
 }
 
 public enum UnitTask
@@ -17,7 +17,7 @@ public abstract class Unit : MonoBehaviour
 {
 
     [SerializeField] private ActionSO[] m_Actions;
-    [SerializeField] private float m_OjectDetectionRadius = 3f;
+    [SerializeField] protected float m_OjectDetectionRadius = 3f;
 
     public bool IsTargeted;
     protected Animator m_Animator;
@@ -32,6 +32,7 @@ public abstract class Unit : MonoBehaviour
 
     public ActionSO[] Actions => m_Actions;
     public SpriteRenderer Renderer => m_SpriteRenderer;
+    public bool HasTarget => Target != null;
 
     protected virtual void Awake()
     {

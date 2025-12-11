@@ -16,9 +16,10 @@ MonoBehaviour:
   ActionName: Build Tower
   Guid: 3c227032-cf78-4f42-95a1-1f6754969151
   m_Structureprefab: {fileID: 1934553038663038800, guid: 5afb6ef5dd7c3e04b9614e22ec6c8947, type: 3}
+  m_ConstructionTime: 10
   m_PlacementSprite: {fileID: 21300000, guid: 7aeaa65ad7cd7a6499a4cff68ba64360, type: 3}
   m_FoundationSprite: {fileID: 21300000, guid: c97eb7255e3fa0249a0326e88315c24d, type: 3}
-  m_CompletionSprite: {fileID: 0}
+  m_CompletionSprite: {fileID: 21300000, guid: 7aeaa65ad7cd7a6499a4cff68ba64360, type: 3}
   m_BuildingSize: {x: 2, y: 3, z: 0}
   m_OriginOffset: {x: -1, y: -2, z: 0}
   m_GoldCost: 10

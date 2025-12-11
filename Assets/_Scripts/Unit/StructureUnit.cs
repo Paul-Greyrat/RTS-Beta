@@ -17,8 +17,20 @@ public class StructureUnit : Unit
         }
     }
 
+    public void OnConstructionFinished() => m_Buildingprocess = null;
+
     public void ResgisterProcess(Buildingprocess process)
     {
         m_Buildingprocess = process;
+    }
+
+    public void AssignWorkerToBuildProcess(WorkerUnit worker)
+    {
+        m_Buildingprocess?.AddWorker(worker);
+    }
+
+    public void UnassignWorkerFromBuildProcess()
+    {
+        m_Buildingprocess?.RemoveWorker();
     }
 }

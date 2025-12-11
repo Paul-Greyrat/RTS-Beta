@@ -113,8 +113,21 @@ public class GameManager : SingertonManager<GameManager>
                 CancelActiveUnit();
                 return;
             }
+            else if (WorkerClickedUnFinishedBuiding(unit))
+            {
+                ((WorkerUnit)ActiveUnit).SendToBuild(unit as StructureUnit);
+                return;
+            }
         }
         SelectNewUnit(unit);
+    }
+
+    bool WorkerClickedUnFinishedBuiding(Unit Clickedunit)
+    {
+        return
+            ActiveUnit is WorkerUnit &&
+            Clickedunit is StructureUnit structure &&
+            structure.IsUnderConstruction;
     }
 
     public void SelectNewUnit(Unit unit)
