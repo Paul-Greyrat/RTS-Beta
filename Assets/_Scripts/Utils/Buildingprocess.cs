@@ -8,6 +8,7 @@ public class Buildingprocess
     private BuildActionSO m_BuildAction;
     private WorkerUnit m_Worker;
     private StructureUnit m_Structure;
+    private ParticleSystem m_ConstructionEffect;
     private float m_ProcessTimer;
     private bool m_IsFinished;
 
@@ -17,10 +18,17 @@ public class Buildingprocess
     public Buildingprocess(
         BuildActionSO buildAction,
         Vector3 placementPosition,
-        WorkerUnit worker
+        WorkerUnit worker,
+        ParticleSystem constructionEffectPrefab
     )
     {
         m_BuildAction = buildAction;
+        var effectOffset = new Vector3(0, -1f, 0);
+        m_ConstructionEffect = Object.Instantiate(
+            constructionEffectPrefab, 
+            placementPosition + effectOffset, 
+            Quaternion.identity
+        );
         m_Structure = Object.Instantiate(m_BuildAction.StructurePrefab); 
         m_Structure.Renderer.sprite = m_BuildAction.FoundationSprite;
         m_Structure.transform.position = placementPosition;
@@ -36,6 +44,11 @@ public class Buildingprocess
         if (InProcess)
         {
             m_ProcessTimer += Time.deltaTime;
+
+            if (!m_ConstructionEffect.isPlaying)
+            {
+                m_ConstructionEffect.Play();
+            }
             
             if (m_ProcessTimer >= m_BuildAction.ConstructionTime)
             {
@@ -51,14 +64,13 @@ public class Buildingprocess
     public void AddWorker(WorkerUnit worker)
     {
         if (HasActiveWorker) return;
-        Debug.Log("Adding Worker");
         m_Worker = worker;
     }
 
     public void RemoveWorker()
     {
         if (!HasActiveWorker) return;
-        Debug.Log("Removing Worker");
         m_Worker = null;
+        m_ConstructionEffect.Stop();
     }
 }

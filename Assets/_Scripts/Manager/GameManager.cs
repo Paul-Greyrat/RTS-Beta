@@ -17,6 +17,10 @@ public class GameManager : SingertonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
+
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem m_ConstructionEffectPrefab;
+
     public Unit ActiveUnit;
     private PlacementProcess m_PlacementProcess;
 
@@ -200,7 +204,8 @@ public class GameManager : SingertonManager<GameManager>
             new Buildingprocess(
                 m_PlacementProcess.BuildAction,
                 buildposition,
-                (WorkerUnit)ActiveUnit
+                (WorkerUnit)ActiveUnit,
+                m_ConstructionEffectPrefab
             );
 
             m_PlacementProcess = null;

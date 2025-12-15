@@ -30,7 +30,7 @@ public class WorkerUnit : HumanoidUnit
     void CheckForConstructionSite()
     {
         var distanceToConstruction = Vector3.Distance(transform.position, Target.transform.position);
-        if ( distanceToConstruction <= m_OjectDetectionRadius)
+        if ( distanceToConstruction <= m_OjectDetectionRadius && CurrentState == UnitState.Idle)
         {
             StartBuilding(Target as StructureUnit);
         }
