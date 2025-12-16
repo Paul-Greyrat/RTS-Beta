@@ -1,75 +1,73 @@
-  
 
 
 using UnityEngine;
 
-public class Buildingprocess
+public class BuildingProcess
 {
     private BuildActionSO m_BuildAction;
     private WorkerUnit m_Worker;
     private StructureUnit m_Structure;
     private ParticleSystem m_ConstructionEffect;
-    private float m_ProcessTimer;
+    private float m_ProgressTimer;
     private bool m_IsFinished;
 
-    private bool InProcess => HasActiveWorker && m_Worker.CurrentState == UnitState.Building;
-
+    private bool InProgress => HasActiveWorker && m_Worker.CurrentState == UnitState.Building;
     public bool HasActiveWorker => m_Worker != null;
-    public Buildingprocess(
+
+    public BuildingProcess(
         BuildActionSO buildAction,
         Vector3 placementPosition,
         WorkerUnit worker,
-        ParticleSystem constructionEffectPrefab
-    )
+        ParticleSystem m_ConstructionEffectPrefab)
     {
         m_BuildAction = buildAction;
         var effectOffset = new Vector3(0, -1f, 0);
         m_ConstructionEffect = Object.Instantiate(
-            constructionEffectPrefab, 
+            m_ConstructionEffectPrefab,
             placementPosition + effectOffset, 
             Quaternion.identity
         );
-        m_Structure = Object.Instantiate(m_BuildAction.StructurePrefab); 
+        m_Structure = Object.Instantiate(buildAction.StructurePrefab);
         m_Structure.Renderer.sprite = m_BuildAction.FoundationSprite;
         m_Structure.transform.position = placementPosition;
-        m_Structure.ResgisterProcess(this);
+        m_Structure.RegisterProcess(this);
         worker.SendToBuild(m_Structure);
-
     }
 
     public void Update()
     {
         if (m_IsFinished) return;
 
-        if (InProcess)
+        if (InProgress)
         {
-            m_ProcessTimer += Time.deltaTime;
+            m_ProgressTimer += Time.deltaTime;
 
             if (!m_ConstructionEffect.isPlaying)
             {
                 m_ConstructionEffect.Play();
-            }
-            
-            if (m_ProcessTimer >= m_BuildAction.ConstructionTime)
+            } 
+
+            if (m_ProgressTimer >= m_BuildAction.ConstructionTime)
             {
                 m_IsFinished = true;
                 m_Structure.Renderer.sprite = m_BuildAction.CompletionSprite;
-                m_Structure.OnConstructionFinished();
                 m_Worker.OnBuildingFinished();
+                m_Structure.OnConstructionFinished();
             }
-
         }
     }
 
     public void AddWorker(WorkerUnit worker)
     {
         if (HasActiveWorker) return;
+        Debug.Log("Adding Worker");
         m_Worker = worker;
     }
 
     public void RemoveWorker()
     {
         if (!HasActiveWorker) return;
+        Debug.Log("Removing Worker");
         m_Worker = null;
         m_ConstructionEffect.Stop();
     }

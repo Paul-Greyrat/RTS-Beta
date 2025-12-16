@@ -1,36 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class StructureUnit : Unit
+
+public class StructureUnit: Unit
 {
-    private Buildingprocess m_Buildingprocess;
+    private BuildingProcess m_BuildingProcess;
 
-    public bool IsUnderConstruction => m_Buildingprocess != null;
+    public bool IsUnderConstuction => m_BuildingProcess != null;
 
     void Update()
     {
-        if (IsUnderConstruction)
+        if (IsUnderConstuction)
         {
-            m_Buildingprocess.Update();
-            
+            m_BuildingProcess.Update();
         }
     }
 
-    public void OnConstructionFinished() => m_Buildingprocess = null;
+    public void OnConstructionFinished() => m_BuildingProcess = null;
 
-    public void ResgisterProcess(Buildingprocess process)
+    public void RegisterProcess(BuildingProcess process)
     {
-        m_Buildingprocess = process;
+        m_BuildingProcess = process;
     }
 
     public void AssignWorkerToBuildProcess(WorkerUnit worker)
     {
-        m_Buildingprocess?.AddWorker(worker);
+        m_BuildingProcess?.AddWorker(worker);
     }
 
     public void UnassignWorkerFromBuildProcess()
     {
-        m_Buildingprocess?.RemoveWorker();
+        m_BuildingProcess?.RemoveWorker();
     }
 }

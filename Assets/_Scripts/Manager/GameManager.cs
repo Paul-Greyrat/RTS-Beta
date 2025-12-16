@@ -5,16 +5,16 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public enum ClickType
+{
+    Move, Attack, Build
+}
+
 public class GameManager : SingertonManager<GameManager>
 {
-    [Header("Tilemap")]
-    [SerializeField] private Tilemap m_WalkableTilemap;
-    [SerializeField] private Tilemap m_OverlayTilemap;
-    [SerializeField] private Tilemap[] m_UnreachableTilemap;
-
-
     [Header("UI")]
-    [SerializeField] private PointToClick m_PointToClickPrefabs;
+    [SerializeField] private PointToClick m_PointToMovePrefabs;
+    [SerializeField] private PointToClick m_PointToBuildPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
 
@@ -55,11 +55,11 @@ public class GameManager : SingertonManager<GameManager>
     {
         if (m_PlacementProcess != null) return;
 
+        var tilemapManager = TilemapManager.Get();
+
         m_PlacementProcess = new PlacementProcess(
             buildAction,
-            m_WalkableTilemap,
-            m_OverlayTilemap,
-            m_UnreachableTilemap
+            tilemapManager
             );
         m_PlacementProcess.ShowPlacementOutLine();
         m_ConfirmationBar.Show( buildAction.GoldCost, buildAction.WoodCost);
@@ -102,7 +102,7 @@ public class GameManager : SingertonManager<GameManager>
         if (hasActiveunit && IsHumannoid(ActiveUnit))
         {
 
-            DisplayClickEffect(worldPoint);
+            DisplayClickEffect(worldPoint, ClickType.Move);
             ActiveUnit.MoveTo(worldPoint);
 
         }
@@ -119,6 +119,7 @@ public class GameManager : SingertonManager<GameManager>
             }
             else if (WorkerClickedUnFinishedBuiding(unit))
             {
+                DisplayClickEffect(unit.transform.position, ClickType.Build);
                 ((WorkerUnit)ActiveUnit).SendToBuild(unit as StructureUnit);
                 return;
             }
@@ -131,7 +132,7 @@ public class GameManager : SingertonManager<GameManager>
         return
             ActiveUnit is WorkerUnit &&
             Clickedunit is StructureUnit structure &&
-            structure.IsUnderConstruction;
+            structure.IsUnderConstuction;
     }
 
     public void SelectNewUnit(Unit unit)
@@ -162,9 +163,16 @@ public class GameManager : SingertonManager<GameManager>
         ClearActionBarUI();
     }
 
-    public void DisplayClickEffect(Vector2 worldPoint)
+    public void DisplayClickEffect(Vector2 worldPoint, ClickType clickType)
     {
-        Instantiate(m_PointToClickPrefabs, (Vector3)worldPoint, Quaternion.identity);
+        if (clickType == ClickType.Move)
+        {
+            Instantiate(m_PointToMovePrefabs, (Vector3)worldPoint, Quaternion.identity);
+        }
+        else if (clickType == ClickType.Build)
+        {
+            Instantiate(m_PointToBuildPrefabs, (Vector3)worldPoint, Quaternion.identity);
+        }
     }
 
     public void ShowUnitAction(Unit unit)
@@ -200,8 +208,9 @@ public class GameManager : SingertonManager<GameManager>
 
         if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildposition))
         {
+            DisplayClickEffect(buildposition, ClickType.Build);
             m_ConfirmationBar.Hide();
-            new Buildingprocess(
+            new BuildingProcess(
                 m_PlacementProcess.BuildAction,
                 buildposition,
                 (WorkerUnit)ActiveUnit,

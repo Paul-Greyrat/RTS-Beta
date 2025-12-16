@@ -1,42 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
+
+
 using UnityEngine;
 
-public enum UnitState
-{
-    Idle, Moving, Attacking, Chopping, minig, Building
+public enum UnitState {
+    Idle, Moving, Attacking, Chopping, Minig, Building
 }
 
-public enum UnitTask
-{
-    None, Build, Attack, Chop, Mine
+public enum UnitTask {
+    None, Build, Chop, Mine, Attack
 }
 
 public abstract class Unit : MonoBehaviour
 {
-
     [SerializeField] private ActionSO[] m_Actions;
-    [SerializeField] protected float m_OjectDetectionRadius = 3f;
+    [SerializeField] protected float m_ObjectDetectionRadius = 3f;
 
     public bool IsTargeted;
+
     protected Animator m_Animator;
-    protected AiPawn m_Aipawn;
+    protected AiPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
-    private Material m_HighlightMaterial;
+    protected Material m_HighlightMaterial;
 
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
-    public Unit Target { get; set; }
+    public Unit Target { get; protected set; }
 
     public ActionSO[] Actions => m_Actions;
     public SpriteRenderer Renderer => m_SpriteRenderer;
     public bool HasTarget => Target != null;
 
-    protected virtual void Awake()
+    protected void Awake()
     {
-
         if (TryGetComponent<Animator>(out var animator))
         {
             m_Animator = animator;
@@ -44,24 +40,22 @@ public abstract class Unit : MonoBehaviour
 
         if (TryGetComponent<AiPawn>(out var aiPawn))
         {
-            m_Aipawn = aiPawn;
+            m_AIPawn = aiPawn;
         }
+
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-
         m_OriginalMaterial = m_SpriteRenderer.material;
-        m_HighlightMaterial = Resources.Load<Material>("Materials/OutLine");
-        
-
-    }
-
-    public void SetState(UnitState state)
-    {
-        OnSetState(CurrentState, state);
+        m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
     }
 
     public void SetTask(UnitTask task)
     {
         OnSetTask(CurrentTask, task);
+    }
+
+    public void SetState(UnitState state)
+    {
+        OnSetState(CurrentState, state);
     }
 
     public void SetTarget(Unit target)
@@ -71,31 +65,28 @@ public abstract class Unit : MonoBehaviour
 
     public void MoveTo(Vector3 destination)
     {
-        m_SpriteRenderer.flipX = destination.x < transform.position.x;
-        m_Aipawn.SetDestination(destination);
+        var direction = (destination - transform.position).normalized;
+        m_SpriteRenderer.flipX = direction.x < 0;
 
+        m_AIPawn.SetDestination(destination);
         OnSetDestination();
-
     }
 
     public void Select()
     {
-        HightLight();
+        Highlight();
         IsTargeted = true;
     }
 
     public void DeSelect()
     {
-        UnHightLight();
+        UnHighlight();
         IsTargeted = false;
     }
 
-    protected virtual void OnSetDestination()
-    {
-        // Override in child classes
-    }
+    protected virtual void OnSetDestination(){}
 
-    protected virtual void OnSetTask( UnitTask oldTask, UnitTask newTask)
+    protected virtual void OnSetTask(UnitTask oldTask, UnitTask newTask)
     {
         CurrentTask = newTask;
     }
@@ -105,17 +96,17 @@ public abstract class Unit : MonoBehaviour
         CurrentState = newState;
     }
 
-    protected Collider2D[] RunProximityOjectDetection()
+    protected Collider2D[] RunProximityObjectDetection()
     {
-        return Physics2D.OverlapCircleAll(transform.position, m_OjectDetectionRadius);
+        return Physics2D.OverlapCircleAll(transform.position, m_ObjectDetectionRadius);
     }
 
-    void HightLight()
+    void Highlight()
     {
         m_SpriteRenderer.material = m_HighlightMaterial;
     }
 
-    void UnHightLight()
+    void UnHighlight()
     {
         m_SpriteRenderer.material = m_OriginalMaterial;
     }
@@ -123,6 +114,6 @@ public abstract class Unit : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 0, 1, 0.3f);
-        Gizmos.DrawSphere(transform.position, m_OjectDetectionRadius);
+        Gizmos.DrawSphere(transform.position, m_ObjectDetectionRadius);
     }
 }

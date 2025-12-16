@@ -20,12 +20,9 @@ public class HumanoidUnit : Unit
     {
         UpdateVeVelocity();
         
-        UpdateBehavior();
+        UpdateBehaviour();
     }
-    protected virtual void UpdateBehavior()
-    {
-        
-    }
+    protected virtual void UpdateBehaviour(){}
 
     protected virtual void UpdateVeVelocity()
     {
