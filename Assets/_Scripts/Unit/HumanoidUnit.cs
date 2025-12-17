@@ -1,40 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.Profiling;
+
+
+using System;
 using UnityEngine;
 
 public class HumanoidUnit : Unit
 {
-    protected Vector2 m_velocity;
+    protected Vector2 m_Velocity;
     protected Vector3 m_LastPosition;
 
-    public float CurrentSpeed => m_velocity.magnitude;
+    protected float m_SmoothFactor = 50;
+    protected float m_SmoothedSpeed;
 
-    protected void Start()
+    public float CurrentSpeed => m_Velocity.magnitude;
+
+    void Start()
     {
         m_LastPosition = transform.position;
     }
 
     protected void Update()
     {
-        UpdateVeVelocity();
-        
+        UpdateVelocity();
         UpdateBehaviour();
     }
+
     protected virtual void UpdateBehaviour(){}
 
-    protected virtual void UpdateVeVelocity()
+    protected virtual void UpdateVelocity()
     {
-        m_velocity = new Vector2(
+        m_Velocity = new Vector2(
             (transform.position.x - m_LastPosition.x),
-            (transform.position.z - m_LastPosition.z)
+            (transform.position.y - m_LastPosition.y)
         ) / Time.deltaTime;
 
         m_LastPosition = transform.position;
-        var state = m_velocity.magnitude > 0 ? UnitState.Moving : UnitState.Idle;
+        m_SmoothedSpeed = Mathf.Lerp(m_SmoothedSpeed, CurrentSpeed, Time.deltaTime * m_SmoothFactor);
+
+        var state = m_SmoothedSpeed > 0.1f ? UnitState.Moving : UnitState.Idle;
         SetState(state);
-        
-        m_Animator?.SetFloat("Speed", Mathf.Clamp01(CurrentSpeed));
+
+        m_Animator?.SetFloat("Speed", Mathf.Clamp01(m_SmoothedSpeed));
     }
 }

@@ -75,11 +75,11 @@
     <Compile Include="Assets\_Scripts\Utils\PlacementProcess.cs" />
     <Compile Include="Assets\_Scripts\Ui\ConfirmationBar.cs" />
     <Compile Include="Assets\_Scripts\AI\AiPawn.cs" />
-    <Compile Include="Assets\_Scripts\AI\PathFinding.cs" />
     <Compile Include="Assets\_Scripts\Unit\Actions\BuildActionSO.cs" />
     <Compile Include="Assets\_Scripts\Ui\ActionButton.cs" />
     <Compile Include="Assets\_Scripts\Ui\PointToClick.cs" />
     <Compile Include="Assets\_Scripts\Unit\HumanoidUnit.cs" />
+    <Compile Include="Assets\_Scripts\AI\Pathfinding.cs" />
     <Compile Include="Assets\_Scripts\Ui\ResourceRequirementDisplay.cs" />
     <Compile Include="Assets\_Scripts\Manager\TilemapManager.cs" />
     <Compile Include="Assets\_Scripts\Ui\ActionBar.cs" />

@@ -1,83 +1,80 @@
 
-
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TilemapManager : SingertonManager<TilemapManager>
+
+public class TilemapManager: SingertonManager<TilemapManager>
 {
     [SerializeField] private Tilemap m_WalkableTilemap;
     [SerializeField] private Tilemap m_OverlayTilemap;
-    [SerializeField] private Tilemap[] m_UnreachableTilemap;
-
-    [Header("Testing")]
-    [SerializeField] private Transform m_StartTransform;
-    [SerializeField] private Transform m_DestinationTransform;
-
+    [SerializeField] private Tilemap[] m_UnreachableTilemaps;
 
     public Tilemap PathfindingTilemap => m_WalkableTilemap;
 
-    private Pathfinding m_PathFinding;
+    private Pathfinding m_Pathfinding;
 
     void Start()
     {
-        m_PathFinding = new Pathfinding(
+        m_Pathfinding = new Pathfinding(
             this
         );
     }
 
-    void Update()
+    public List<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition)
     {
-        m_PathFinding.FindPath(
-            m_StartTransform.position, 
-            m_DestinationTransform.position
-        );
+        return m_Pathfinding.FindPath(startPosition, endPosition);
     }
 
-    public bool CanWalkAtTile(Vector3Int TilePos)
+    public Node FindNode(Vector3 position)
     {
-        return 
-            m_WalkableTilemap.HasTile(TilePos) &&
-            !IsInUnreachableTilemap(TilePos);
+        return m_Pathfinding.FindNode(position);
     }
 
-    public bool CanPlaceTile(Vector3Int TilePos)
+    public bool CanWalkAtTile(Vector3Int tilePosition)
     {
-        return 
-            m_WalkableTilemap.HasTile(TilePos) &&
-            !IsInUnreachableTilemap(TilePos) &&
-            !IsBlockedByGameobject(TilePos);
+        return
+            m_WalkableTilemap.HasTile(tilePosition) &&
+            !IsInUnreachableTilemap(tilePosition);
     }
 
-    public bool IsInUnreachableTilemap(Vector3Int TilePos)
+    public bool CanPlaceTile(Vector3Int tilePosition)
     {
-        foreach(var tilemap in m_UnreachableTilemap)
+        return
+            m_WalkableTilemap.HasTile(tilePosition) &&
+            !IsInUnreachableTilemap(tilePosition) &&
+            !IsBlockedByGameobject(tilePosition);
+    }
+
+    public bool IsInUnreachableTilemap(Vector3Int tilePosition)
+    {
+        foreach (var tilemap in m_UnreachableTilemaps)
         {
-            if(tilemap.HasTile(TilePos)) return true;
+            if (tilemap.HasTile(tilePosition)) return true;
         }
 
         return false;
     }
 
-    public bool IsBlockedByGameobject(Vector3Int TilePos)
+    public bool IsBlockedByGameobject(Vector3Int tilePosition)
     {
         Vector3 tileSize = m_WalkableTilemap.cellSize;
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(TilePos + tileSize / 2, tileSize * 0.9f, 0);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(tilePosition + tileSize / 2, tileSize * 0.5f, 0);
 
         foreach (var collider in colliders)
         {
             var layer = collider.gameObject.layer;
-            if ( layer == LayerMask.NameToLayer("Player"))
+            if (layer == LayerMask.NameToLayer("Player"))
             {
                 return true;
             }
         }
 
-        return false;  
+        return false;
     }
 
-    public void SetTileOverlay(Vector3Int tilePos, Tile tile)
+    public void SetTileOverlay(Vector3Int tilePosition, Tile tile)
     {
-        m_OverlayTilemap.SetTile(tilePos, tile);
+        m_OverlayTilemap.SetTile(tilePosition, tile);
     }
 }

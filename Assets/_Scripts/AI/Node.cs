@@ -3,12 +3,12 @@
 
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node
 {
     public int x;
     public int y;
-    public float CenterX;
-    public float CenterY;
+    public float centerX;
+    public float centerY;
     public bool isWalkable;
     public float gCost;
     public float hCost;
@@ -19,10 +19,11 @@ public class Node : MonoBehaviour
     {
         x = position.x;
         y = position.y;
-        Vector3 halfCellSize = cellSize / 2;
+        Vector3 halfCellSize = cellSize / 2f;
         var nodeCenterPosition = position + halfCellSize;
-        CenterX = nodeCenterPosition.x;
-        CenterY = nodeCenterPosition.y;
+        centerX = nodeCenterPosition.x;
+        centerY = nodeCenterPosition.y;
+
         this.isWalkable = isWalkable;
     }
 
