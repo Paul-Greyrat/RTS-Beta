@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8214654045339772080}
   - component: {fileID: 1934553038663038800}
   - component: {fileID: 3779184434000662958}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: []
-  m_OjectDetectionRadius: 3
+  m_ObjectDetectionRadius: 3
   IsTargeted: 0
 --- !u!70 &3779184434000662958
 CapsuleCollider2D:

@@ -26,6 +26,11 @@ public class TilemapManager: SingertonManager<TilemapManager>
         return m_Pathfinding.FindPath(startPosition, endPosition);
     }
 
+    public void UpdateNodesInArea(Vector3Int startPosition, int width, int height)
+    {
+        m_Pathfinding.UpdateNodesInArea(startPosition, width, height);
+    }
+
     public Node FindNode(Vector3 position)
     {
         return m_Pathfinding.FindNode(position);
@@ -35,7 +40,8 @@ public class TilemapManager: SingertonManager<TilemapManager>
     {
         return
             m_WalkableTilemap.HasTile(tilePosition) &&
-            !IsInUnreachableTilemap(tilePosition);
+            !IsInUnreachableTilemap(tilePosition) &&
+            !IsBlockedByBuilding(tilePosition);
     }
 
     public bool CanPlaceTile(Vector3Int tilePosition)
@@ -56,6 +62,16 @@ public class TilemapManager: SingertonManager<TilemapManager>
         return false;
     }
 
+    public bool IsBlockedByBuilding(Vector3Int tilePosition)
+    {
+        Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + m_WalkableTilemap.cellSize / 2;
+        int buildingLayer = 1 << LayerMask.NameToLayer("Building");
+
+        Collider2D[] colliders = Physics2D.OverlapPointAll(worldPosition, buildingLayer);
+
+        return colliders.Length > 0;
+    }
+
     public bool IsBlockedByGameobject(Vector3Int tilePosition)
     {
         Vector3 tileSize = m_WalkableTilemap.cellSize;
@@ -64,7 +80,10 @@ public class TilemapManager: SingertonManager<TilemapManager>
         foreach (var collider in colliders)
         {
             var layer = collider.gameObject.layer;
-            if (layer == LayerMask.NameToLayer("Player"))
+            if (
+                layer == LayerMask.NameToLayer("Player") ||
+                layer == LayerMask.NameToLayer("Building")
+            )
             {
                 return true;
             }

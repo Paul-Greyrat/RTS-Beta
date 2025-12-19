@@ -71,6 +71,7 @@
     <Compile Include="Assets\_Scripts\Utils\BuildingProcess.cs" />
     <Compile Include="Assets\_Scripts\Unit\WorkerUnit.cs" />
     <Compile Include="Assets\_Scripts\AI\Node.cs" />
+    <Compile Include="Assets\_Scripts\Utils\CameraController.cs" />
     <Compile Include="Assets\_Scripts\Unit\StructureUnit.cs" />
     <Compile Include="Assets\_Scripts\Utils\PlacementProcess.cs" />
     <Compile Include="Assets\_Scripts\Ui\ConfirmationBar.cs" />

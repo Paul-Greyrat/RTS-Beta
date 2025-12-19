@@ -76,6 +76,9 @@ public class Pathfinding
 
         openList.Add(startNode);
 
+        Node closestNode = startNode;
+        var closestDistanceToEnd = GetDistance(closestNode, endNode);
+
         while (openList.Count > 0)
         {
             Node currentNode = GetLowestFCostNode(openList);
@@ -98,10 +101,17 @@ public class Pathfinding
 
                 if (tentativeG < neighbor.gCost || !openList.Contains(neighbor))
                 {
+                    var distance = GetDistance(neighbor, endNode);
                     neighbor.gCost = tentativeG;
-                    neighbor.hCost = GetDistance(neighbor, endNode);
+                    neighbor.hCost = distance;
                     neighbor.fCost = neighbor.gCost + neighbor.hCost;
                     neighbor.parent = currentNode;
+
+                    if (distance < closestDistanceToEnd)
+                    {
+                        closestNode = neighbor;
+                        closestDistanceToEnd = distance;
+                    }
 
                     if (!openList.Contains(neighbor))
                     {
@@ -111,8 +121,33 @@ public class Pathfinding
             }
         }
 
+        var unfinshedPath = RetracePath(startNode, closestNode, startPosition);
         ResetNodes(openList, closedList);
-        return new List<Vector3>();
+        return unfinshedPath;
+    }
+
+    public void UpdateNodesInArea(Vector3Int startPosition, int width, int height)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3Int nodePosition = new Vector3Int(
+                    startPosition.x + x,
+                    startPosition.y + y
+                );
+
+                int gridX = nodePosition.x - m_GridOffset.x;
+                int gridY = nodePosition.y - m_GridOffset.y;
+
+                if (gridX >= 0 && gridX < m_Width && gridY >= 0 && gridY < m_Height)
+                {
+                    Node node = m_Grid[gridX, gridY];
+                    Vector3Int cellPosition = new Vector3Int(node.x, node.y, 0);
+                    node.isWalkable = m_TilemapManager.CanWalkAtTile(cellPosition);
+                }
+            }
+        }
     }
 
     void ResetNodes(List<Node> openList, HashSet<Node> closedList)

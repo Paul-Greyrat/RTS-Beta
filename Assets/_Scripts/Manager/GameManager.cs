@@ -18,11 +18,16 @@ public class GameManager : SingertonManager<GameManager>
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
 
+    [Header("Camera Settings")]
+    [SerializeField] private float m_PanSpeed = 100;
+    [SerializeField] private float m_MobilePanSpeed = 10;
+
     [Header("VFX")]
     [SerializeField] private ParticleSystem m_ConstructionEffectPrefab;
 
     public Unit ActiveUnit;
     private PlacementProcess m_PlacementProcess;
+    private CameraController m_CameraController;
 
     private int m_gold = 50;
     private int m_wood = 50;
@@ -35,11 +40,13 @@ public class GameManager : SingertonManager<GameManager>
 
     public void Start()
     {
+        m_CameraController = new CameraController(m_PanSpeed, m_MobilePanSpeed);
         ClearActionBarUI();
     }
 
     public void Update()
     {
+        m_CameraController.Update();
 
         if (m_PlacementProcess != null)
         {
@@ -64,6 +71,7 @@ public class GameManager : SingertonManager<GameManager>
         m_PlacementProcess.ShowPlacementOutLine();
         m_ConfirmationBar.Show( buildAction.GoldCost, buildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildPlacement, CancelBuildPlacement);
+        m_CameraController.m_lockCamera = true;
     }
 
     public void DetectClick(Vector2 inputPosition)
@@ -218,6 +226,7 @@ public class GameManager : SingertonManager<GameManager>
             );
 
             m_PlacementProcess = null;
+            m_CameraController.m_lockCamera = false;
         }
         else
         {
@@ -235,6 +244,7 @@ public class GameManager : SingertonManager<GameManager>
         m_ConfirmationBar.Hide();
         m_PlacementProcess.Cleanup();
         m_PlacementProcess = null;
+        m_CameraController.m_lockCamera = false;
     }
 
     bool TryDeductResources(int goldCost, int woodCost)
