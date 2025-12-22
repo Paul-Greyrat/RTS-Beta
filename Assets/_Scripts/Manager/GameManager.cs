@@ -2,6 +2,7 @@
 
 
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -26,6 +27,8 @@ public class GameManager : SingertonManager<GameManager>
     [SerializeField] private ParticleSystem m_ConstructionEffectPrefab;
 
     public Unit ActiveUnit;
+    private List<Unit> m_PlayerUnits = new();
+    private List<Unit> m_Enemies = new();
     private PlacementProcess m_PlacementProcess;
     private CameraController m_CameraController;
 
@@ -58,6 +61,51 @@ public class GameManager : SingertonManager<GameManager>
         }
     }
 
+    public void RegisterUnit(Unit unit)
+    {
+        if (unit.IsPlayer)
+        {
+            m_PlayerUnits.Add(unit);
+        }
+        else
+        {
+            m_Enemies.Add(unit);
+        }
+        Debug.Log($"Registered unit. Player units: {m_PlayerUnits.Count}, Enemy units: {m_Enemies.Count}");
+    }
+
+    public void UnregisterUnit(Unit unit)
+    {
+        if (unit.IsPlayer)
+        {
+            m_PlayerUnits.Remove(unit);
+        }
+        else
+        {
+            m_Enemies.Remove(unit);
+        }
+    }
+
+        public Unit FindClosestUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
+    {
+        List<Unit> units = isPlayer ? m_PlayerUnits : m_Enemies;
+        float sqrMaxDistance = maxDistance * maxDistance;
+        Unit closestUnit = null;
+        float closestDistanceSqr = float.MaxValue;
+
+        foreach (Unit unit in units)
+        {
+            float sqrDistance = (unit.transform.position - originPosition).sqrMagnitude;
+            if (sqrDistance < sqrMaxDistance && sqrDistance < closestDistanceSqr)
+            {
+                closestUnit = unit;
+                closestDistanceSqr = sqrDistance;
+            }
+        }
+
+        return closestUnit;
+    }
+
     public void StartBuidProcess(BuildActionSO buildAction)
     {
         if (m_PlacementProcess != null) return;
@@ -69,7 +117,7 @@ public class GameManager : SingertonManager<GameManager>
             tilemapManager
             );
         m_PlacementProcess.ShowPlacementOutLine();
-        m_ConfirmationBar.Show( buildAction.GoldCost, buildAction.WoodCost);
+        m_ConfirmationBar.Show(buildAction.GoldCost, buildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildPlacement, CancelBuildPlacement);
         m_CameraController.m_lockCamera = true;
     }
@@ -86,7 +134,10 @@ public class GameManager : SingertonManager<GameManager>
 
         if (HasClickedOnUnit(hit, out Unit unit))
         {
-            HandleClickOnUnit(unit);
+            if (unit.IsPlayer)
+            {
+                HandleClickOnPlayerUnit(unit);
+            }
         }
         else
         {
@@ -116,7 +167,7 @@ public class GameManager : SingertonManager<GameManager>
         }
     }
 
-    public void HandleClickOnUnit(Unit unit)
+    public void HandleClickOnPlayerUnit(Unit unit)
     {
         if (hasActiveunit)
         {

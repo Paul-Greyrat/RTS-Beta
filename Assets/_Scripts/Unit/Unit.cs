@@ -17,6 +17,7 @@ public abstract class Unit : MonoBehaviour
 
     public bool IsTargeted;
 
+    protected GameManager m_GameManager;
     protected Animator m_Animator;
     protected AiPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
@@ -26,10 +27,19 @@ public abstract class Unit : MonoBehaviour
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
     public Unit Target { get; protected set; }
+    public virtual bool IsPlayer => true;
+    public virtual bool IsBuilding => false;
+
 
     public ActionSO[] Actions => m_Actions;
     public SpriteRenderer Renderer => m_SpriteRenderer;
     public bool HasTarget => Target != null;
+
+
+    protected virtual void Start()
+    {
+        RegisterUnit();
+    }
 
     protected void Awake()
     {
@@ -43,7 +53,8 @@ public abstract class Unit : MonoBehaviour
             m_AIPawn = aiPawn;
             m_AIPawn.OnNewPositionSelected += TurnToPosition;
         }
-
+        
+        m_GameManager = GameManager.Get();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_OriginalMaterial = m_SpriteRenderer.material;
         m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
@@ -55,6 +66,8 @@ public abstract class Unit : MonoBehaviour
         {
             m_AIPawn.OnNewPositionSelected -= TurnToPosition;
         }
+
+        UnregisterUnit();
     }
 
     public void SetTask(UnitTask task)
@@ -103,6 +116,22 @@ public abstract class Unit : MonoBehaviour
     protected virtual void OnSetState(UnitState oldState, UnitState newState)
     {
         CurrentState = newState;
+    }
+
+    protected void RegisterUnit()
+    {
+        m_GameManager.RegisterUnit(this);
+    }
+
+    protected void UnregisterUnit()
+    {
+        m_GameManager.UnregisterUnit(this);
+    }
+
+    protected virtual bool TryFindClosestFoe(out Unit foe)
+    {
+        foe = m_GameManager.FindClosestUnit(transform.position, m_ObjectDetectionRadius, !IsPlayer);
+        return foe != null;
     }
 
     protected Collider2D[] RunProximityObjectDetection()
