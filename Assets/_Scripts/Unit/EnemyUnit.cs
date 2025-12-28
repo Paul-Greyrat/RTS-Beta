@@ -12,6 +12,6 @@ public class EnemyUnit : HumanoidUnit
         {
             Debug.Log(foe.gameObject.name);
         }
-    }
+    } 
 }
  
