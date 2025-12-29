@@ -40,6 +40,6 @@ public class HumanoidUnit : Unit
         var state = m_SmoothedSpeed > 0.1f ? UnitState.Moving : UnitState.Idle;
         SetState(state);
 
-        m_Animator?.SetFloat("Speed", Mathf.Clamp01(m_SmoothedSpeed));
+        m_Animator?.SetFloat("Speed", Mathf.Clamp01(m_SmoothedSpeed)); 
     }
 }
