@@ -8,9 +8,49 @@ public class EnemyUnit : HumanoidUnit
 
     protected override void UpdateBehaviour()
     {
-        if (TryFindClosestFoe(out var foe))
+
+        switch (CurrentState)
         {
-            Debug.Log(foe.gameObject.name);
+            case UnitState.Idle:
+            case UnitState.Moving:
+                if (HasTarget)
+                {
+                    if (IsTargetInRange(Target.transform))
+                    {
+                        SetState(UnitState.Attacking);
+                        // Stop moving
+                    }
+                    else
+                    {
+                        MoveTo(Target.transform.position);
+                    }
+                }
+                else
+                {
+                    if (TryFindClosestFoe(out var foe))
+                    {
+                        Debug.Log(foe.gameObject.name);
+                    }
+                }
+                break;
+            case UnitState.Attacking:
+                if (HasTarget)
+                {
+                    if (IsTargetInRange(Target.transform))
+                    {
+                        Debug.Log("Attacking");
+                    }
+                    else
+                    {
+                        SetState(UnitState.Idle);
+                    }
+                }
+                else
+                {
+                    SetState(UnitState.Idle);
+                }
+
+                break;
         }
     }
 }
