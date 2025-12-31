@@ -17,11 +17,13 @@ public class EnemyUnit : HumanoidUnit
                 {
                     if (IsTargetInRange(Target.transform))
                     {
+                        Debug.Log("Changing to Attacking State");
                         SetState(UnitState.Attacking);
-                        // Stop moving
+                        //stop movement
                     }
                     else
                     {
+                        Debug.Log("Moving to Target");
                         MoveTo(Target.transform.position);
                     }
                 }
@@ -29,28 +31,34 @@ public class EnemyUnit : HumanoidUnit
                 {
                     if (TryFindClosestFoe(out var foe))
                     {
-                        Debug.Log(foe.gameObject.name);
+                        SetTarget(foe);
+                        MoveTo(foe.transform.position);
+                        Debug.Log("Target Detected - Move to target!");
                     }
                 }
                 break;
+
             case UnitState.Attacking:
                 if (HasTarget)
                 {
                     if (IsTargetInRange(Target.transform))
                     {
-                        Debug.Log("Attacking");
+                        tryAttackCurrenttarget();
                     }
                     else
                     {
-                        SetState(UnitState.Idle);
+                        Debug.Log("Back to Moving target");
+                        SetState(UnitState.Moving);
                     }
                 }
                 else
                 {
+                    Debug.Log("back to Idle state");
                     SetState(UnitState.Idle);
                 }
 
                 break;
         }
-    }
+    } 
 }
+ 

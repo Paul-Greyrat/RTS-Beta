@@ -17,7 +17,7 @@ public class StructureUnit: Unit
             m_BuildingProcess.Update();
         }
     }
-
+ 
     void OnDestroy()
     {
         UpdateWalkability();

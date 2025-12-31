@@ -45,7 +45,7 @@ public class HumanoidUnit : Unit
         }
     }
 
-    protected void UpdateMovementAnimation()
+    protected virtual void UpdateMovementAnimation()
     {
         m_Animator?.SetFloat("Speed", Mathf.Clamp01(m_SmoothedSpeed));
     }

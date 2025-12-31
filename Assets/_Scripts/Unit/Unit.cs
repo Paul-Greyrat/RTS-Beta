@@ -2,11 +2,13 @@
 
 using UnityEngine;
 
-public enum UnitState {
-    Idle, Moving, Attacking, Chopping, Minig, Building
+public enum UnitState
+{
+    Idle, Moving, Attacking, Chopping, Mining, Building
 }
 
-public enum UnitTask {
+public enum UnitTask
+{
     None, Build, Chop, Mine, Attack
 }
 
@@ -16,6 +18,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_ObjectDetectionRadius = 3f;
     [SerializeField] protected float m_UnitDetectionRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1.0f;
+    [SerializeField] protected float m_AutoAttackFrequency = 1.0f;
 
     public bool IsTargeted;
 
@@ -26,6 +29,7 @@ public abstract class Unit : MonoBehaviour
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
     protected float m_NextUnitDetectionTime;
+    protected float m_NextAutoAttackTime;
 
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
@@ -56,7 +60,7 @@ public abstract class Unit : MonoBehaviour
             m_AIPawn = aiPawn;
             m_AIPawn.OnNewPositionSelected += TurnToPosition;
         }
-        
+
         m_GameManager = GameManager.Get();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_OriginalMaterial = m_SpriteRenderer.material;
@@ -109,7 +113,7 @@ public abstract class Unit : MonoBehaviour
         IsTargeted = false;
     }
 
-    protected virtual void OnSetDestination(){}
+    protected virtual void OnSetDestination() { }
 
     protected virtual void OnSetTask(UnitTask oldTask, UnitTask newTask)
     {
@@ -145,13 +149,24 @@ public abstract class Unit : MonoBehaviour
             foe = null;
             return false;
         }
-        
+
+    }
+
+    protected virtual bool tryAttackCurrenttarget()
+    {
+        if(Time.time >= m_NextUnitDetectionTime){
+            Debug.Log("Attacking");
+            m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
+            return true;
+        }
+
+        Debug.Log("Attack is on CD");
+        return false;
     }
 
     protected bool IsTargetInRange(Transform target)
     {
-        var distance = Vector3.Distance(target.transform.position, transform.position);
-        return distance <= m_AttackRange;
+        return Vector3.Distance(target.transform.position, transform.position) <= m_AttackRange;
     }
 
     protected Collider2D[] RunProximityObjectDetection()

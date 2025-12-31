@@ -13,7 +13,7 @@ public static class GreyUtils
     public static bool TryGetShotClickposition(out Vector2 inputPosition, float maxDistance = 5f)
     {
         inputPosition = InputPosition;
-
+ 
             if (IsLeftClickOrTapDown)
             {
                 m_InitialTouchPosition = inputPosition;
