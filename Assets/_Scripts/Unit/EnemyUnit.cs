@@ -19,11 +19,10 @@ public class EnemyUnit : HumanoidUnit
                     {
                         Debug.Log("Changing to Attacking State");
                         SetState(UnitState.Attacking);
-                        //stop movement
+                        StopMovement();
                     }
                     else
                     {
-                        Debug.Log("Moving to Target");
                         MoveTo(Target.transform.position);
                     }
                 }
@@ -33,7 +32,6 @@ public class EnemyUnit : HumanoidUnit
                     {
                         SetTarget(foe);
                         MoveTo(foe.transform.position);
-                        Debug.Log("Target Detected - Move to target!");
                     }
                 }
                 break;
@@ -47,13 +45,11 @@ public class EnemyUnit : HumanoidUnit
                     }
                     else
                     {
-                        Debug.Log("Back to Moving target");
                         SetState(UnitState.Moving);
                     }
                 }
                 else
                 {
-                    Debug.Log("back to Idle state");
                     SetState(UnitState.Idle);
                 }
 

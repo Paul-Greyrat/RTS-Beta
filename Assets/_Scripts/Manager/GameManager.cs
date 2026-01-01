@@ -71,7 +71,6 @@ public class GameManager : SingertonManager<GameManager>
         {
             m_Enemies.Add(unit);
         }
-        Debug.Log($"Registered unit. Player units: {m_PlayerUnits.Count}, Enemy units: {m_Enemies.Count}");
     }
 
     public void UnregisterUnit(Unit unit)

@@ -113,6 +113,11 @@ public abstract class Unit : MonoBehaviour
         IsTargeted = false;
     }
 
+    public void StopMovement()
+    {
+        m_AIPawn.Stop();
+    }
+
     protected virtual void OnSetDestination() { }
 
     protected virtual void OnSetTask(UnitTask oldTask, UnitTask newTask)
@@ -155,13 +160,21 @@ public abstract class Unit : MonoBehaviour
     protected virtual bool tryAttackCurrenttarget()
     {
         if(Time.time >= m_NextUnitDetectionTime){
-            Debug.Log("Attacking");
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
+            PerformAttackAnimation();
             return true;
         }
 
         Debug.Log("Attack is on CD");
         return false;
+    }
+
+    protected virtual void PerformAttackAnimation()
+    {
+        if (m_Animator != null)
+        {
+            m_Animator.SetTrigger("Attack");
+        }
     }
 
     protected bool IsTargetInRange(Transform target)

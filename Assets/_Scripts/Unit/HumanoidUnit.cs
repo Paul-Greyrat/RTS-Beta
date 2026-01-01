@@ -49,4 +49,21 @@ public class HumanoidUnit : Unit
     {
         m_Animator?.SetFloat("Speed", Mathf.Clamp01(m_SmoothedSpeed));
     }
+
+    protected override void PerformAttackAnimation()
+    {
+        Vector3 direction = (Target.transform.position - transform.position).normalized;
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            m_Animator.SetTrigger("AttackHorizontal");
+            m_SpriteRenderer.flipX = direction.x < 0;
+
+        }
+        else
+        {
+            m_Animator.SetTrigger(direction.y > 0 ? "AttackUp" : "AttackDown");
+        }
+    }
+
 }
