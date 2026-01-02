@@ -65,5 +65,5 @@ public class HumanoidUnit : Unit
             m_Animator.SetTrigger(direction.y > 0 ? "AttackUp" : "AttackDown");
         }
     }
-
+ 
 }

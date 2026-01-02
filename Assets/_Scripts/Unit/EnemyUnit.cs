@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyUnit : HumanoidUnit
 {
     public override bool IsPlayer => false;
+    private float m_AttackCommitmentTime = 1f;
+    private float m_CurrentAttackCommitmentTime = 0;
 
     protected override void UpdateBehaviour()
     {
@@ -41,11 +43,16 @@ public class EnemyUnit : HumanoidUnit
                 {
                     if (IsTargetInRange(Target.transform))
                     {
+                        m_CurrentAttackCommitmentTime = m_AttackCommitmentTime;
                         tryAttackCurrenttarget();
                     }
                     else
                     {
-                        SetState(UnitState.Moving);
+                        m_CurrentAttackCommitmentTime -= Time.deltaTime;
+                        if (m_CurrentAttackCommitmentTime <= 0)
+                        {
+                            SetState(UnitState.Moving);
+                        }
                     }
                 }
                 else
