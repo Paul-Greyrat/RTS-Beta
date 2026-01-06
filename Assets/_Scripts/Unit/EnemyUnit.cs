@@ -44,7 +44,7 @@ public class EnemyUnit : HumanoidUnit
                     if (IsTargetInRange(Target.transform))
                     {
                         m_CurrentAttackCommitmentTime = m_AttackCommitmentTime;
-                        tryAttackCurrenttarget();
+                        TryAttackCurrentTarget();
                     }
                     else
                     {

@@ -18,6 +18,7 @@ public class GameManager : SingertonManager<GameManager>
     [SerializeField] private PointToClick m_PointToBuildPrefabs;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
+    [SerializeField] private TextPobupController m_TextPopupController;
 
     [Header("Camera Settings")]
     [SerializeField] private float m_PanSpeed = 100;
@@ -83,6 +84,12 @@ public class GameManager : SingertonManager<GameManager>
         {
             m_Enemies.Remove(unit);
         }
+    }
+
+    public void ShowTextPopup(string text, Color color, Vector3 position)
+    {
+        m_TextPopupController.Spawn(text, color, position);
+
     }
 
         public Unit FindClosestUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
@@ -197,7 +204,7 @@ public class GameManager : SingertonManager<GameManager>
     {
         if (hasActiveunit)
         {
-            ActiveUnit.DeSelect();
+            ActiveUnit.Deselect();
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
@@ -216,7 +223,7 @@ public class GameManager : SingertonManager<GameManager>
 
     public void CancelActiveUnit()
     {
-        ActiveUnit.DeSelect();
+        ActiveUnit.Deselect();
         ActiveUnit = null;
         ClearActionBarUI();
     }

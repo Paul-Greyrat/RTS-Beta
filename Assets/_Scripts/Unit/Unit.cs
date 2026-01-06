@@ -2,11 +2,10 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public enum UnitState
 {
-    Idle, Moving, Attacking, Chopping, Mining, Building
+    Idle, Moving, Attacking, Chopping, Minig, Building
 }
 
 public enum UnitTask
@@ -18,34 +17,32 @@ public abstract class Unit : MonoBehaviour
 {
     [SerializeField] private ActionSO[] m_Actions;
     [SerializeField] protected float m_ObjectDetectionRadius = 3f;
-    [SerializeField] protected float m_UnitDetectionRate = 0.5f;
+    [SerializeField] protected float m_UnitDetectionCheckRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1.0f;
-    [SerializeField] protected float m_AutoAttackFrequency = 1.0f;
+    [SerializeField] protected float m_AutoAttackFrequency = 1.5f;
     [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
     [SerializeField] protected int m_AutoAttackDamage = 7;
 
     public bool IsTargeted;
-
     protected GameManager m_GameManager;
     protected Animator m_Animator;
     protected AiPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
+    protected CapsuleCollider2D m_Collider;
     protected float m_NextUnitDetectionTime;
     protected float m_NextAutoAttackTime;
 
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
     public Unit Target { get; protected set; }
+
     public virtual bool IsPlayer => true;
     public virtual bool IsBuilding => false;
-
-
     public ActionSO[] Actions => m_Actions;
     public SpriteRenderer Renderer => m_SpriteRenderer;
     public bool HasTarget => Target != null;
-
 
     protected virtual void Start()
     {
@@ -65,6 +62,7 @@ public abstract class Unit : MonoBehaviour
             m_AIPawn.OnNewPositionSelected += TurnToPosition;
         }
 
+        m_Collider = GetComponent<CapsuleCollider2D>();
         m_GameManager = GameManager.Get();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_OriginalMaterial = m_SpriteRenderer.material;
@@ -111,7 +109,7 @@ public abstract class Unit : MonoBehaviour
         IsTargeted = true;
     }
 
-    public void DeSelect()
+    public void Deselect()
     {
         UnHighlight();
         IsTargeted = false;
@@ -120,6 +118,13 @@ public abstract class Unit : MonoBehaviour
     public void StopMovement()
     {
         m_AIPawn.Stop();
+    }
+
+    public Vector3 GetTopPosition()
+    {
+        if (m_Collider == null) return transform.position;
+
+        return transform.position + Vector3.up * m_Collider.size.y / 2;
     }
 
     protected virtual void OnSetDestination() { }
@@ -134,12 +139,12 @@ public abstract class Unit : MonoBehaviour
         CurrentState = newState;
     }
 
-    protected void RegisterUnit()
+    protected virtual void RegisterUnit()
     {
         m_GameManager.RegisterUnit(this);
     }
 
-    protected void UnregisterUnit()
+    protected virtual void UnregisterUnit()
     {
         m_GameManager.UnregisterUnit(this);
     }
@@ -148,8 +153,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (Time.time >= m_NextUnitDetectionTime)
         {
-            Debug.Log("checking");
-            m_NextUnitDetectionTime = Time.time + m_UnitDetectionRate;
+            m_NextUnitDetectionTime = Time.time + m_UnitDetectionCheckRate;
             foe = m_GameManager.FindClosestUnit(transform.position, m_ObjectDetectionRadius, !IsPlayer);
             return foe != null;
         }
@@ -158,12 +162,12 @@ public abstract class Unit : MonoBehaviour
             foe = null;
             return false;
         }
-
     }
 
-    protected virtual bool tryAttackCurrenttarget()
+    protected virtual bool TryAttackCurrentTarget()
     {
-        if(Time.time >= m_NextUnitDetectionTime){
+        if (Time.time >= m_NextAutoAttackTime)
+        {
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
             PerformAttackAnimation();
             StartCoroutine(DelayDamage(m_AutoAttackDamageDelay, m_AutoAttackDamage, Target));
@@ -180,9 +184,11 @@ public abstract class Unit : MonoBehaviour
 
     protected virtual void TakeDamage(int damage, Unit damager)
     {
-        // Implement health reduction logic here
-
-        Debug.Log($"{this.gameObject.name} took {damage} damage from {damager.gameObject.name}");
+        m_GameManager.ShowTextPopup(
+            damage.ToString(),
+            Color.red,
+            GetTopPosition()
+        );
     }
 
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
