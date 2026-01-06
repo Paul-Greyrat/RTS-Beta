@@ -1,6 +1,8 @@
 
 
+using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public enum UnitState
 {
@@ -19,6 +21,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_UnitDetectionRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1.0f;
     [SerializeField] protected float m_AutoAttackFrequency = 1.0f;
+    [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
+    [SerializeField] protected int m_AutoAttackDamage = 7;
 
     public bool IsTargeted;
 
@@ -162,18 +166,32 @@ public abstract class Unit : MonoBehaviour
         if(Time.time >= m_NextUnitDetectionTime){
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
             PerformAttackAnimation();
+            StartCoroutine(DelayDamage(m_AutoAttackDamageDelay, m_AutoAttackDamage, Target));
             return true;
         }
 
-        Debug.Log("Attack is on CD");
         return false;
     }
 
     protected virtual void PerformAttackAnimation()
     {
-        if (m_Animator != null)
+
+    }
+
+    protected virtual void TakeDamage(int damage, Unit damager)
+    {
+        // Implement health reduction logic here
+
+        Debug.Log($"{this.gameObject.name} took {damage} damage from {damager.gameObject.name}");
+    }
+
+    protected IEnumerator DelayDamage(float delay, int damage, Unit target)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (target != null)
         {
-            m_Animator.SetTrigger("Attack");
+            target.TakeDamage(damage, this);
         }
     }
 
