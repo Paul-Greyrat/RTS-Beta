@@ -101,6 +101,8 @@ public class GameManager : SingertonManager<GameManager>
 
         foreach (Unit unit in units)
         {
+            if (unit.CurrentState == UnitState.Dead) continue;
+
             float sqrDistance = (unit.transform.position - originPosition).sqrMagnitude;
             if (sqrDistance < sqrMaxDistance && sqrDistance < closestDistanceSqr)
             {
@@ -202,6 +204,8 @@ public class GameManager : SingertonManager<GameManager>
 
     public void SelectNewUnit(Unit unit)
     {
+        if (unit.CurrentState == UnitState.Dead) return;
+        
         if (hasActiveunit)
         {
             ActiveUnit.Deselect();
