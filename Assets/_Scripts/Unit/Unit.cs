@@ -23,7 +23,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_AutoAttackFrequency = 1.5f;
     [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
     [SerializeField] protected int m_AutoAttackDamage = 7;
-    [SerializeField] protected int m_Health = 100;
+    [SerializeField] protected int m_Health = 100; 
 
     public bool IsTargeted;
     protected GameManager m_GameManager;
@@ -124,11 +124,6 @@ public abstract class Unit : MonoBehaviour
         IsTargeted = false;
     }
 
-    public void StopMovement()
-    {
-        if (m_AIPawn != null) m_AIPawn.Stop();
-    }
-
     public Vector3 GetTopPosition()
     {
         if (m_Collider == null) return transform.position;
@@ -187,16 +182,14 @@ public abstract class Unit : MonoBehaviour
     }
 
     protected virtual void PerformAttackAnimation(){}
+
     protected virtual void Die()
     {
-        Debug.Log($"{gameObject.name} has died.");
         SetState(UnitState.Dead);
         if (IsTargeted)
         {
-            Deselect();
+            Destroy(gameObject);
         }
-
-        StopMovement();
     }
 
     protected virtual void TakeDamage(int damage, Unit damager)
@@ -259,4 +252,5 @@ public abstract class Unit : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.4f);
         Gizmos.DrawSphere(transform.position, m_AttackRange);
     }
+    
 }

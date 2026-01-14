@@ -21,7 +21,6 @@ public class EnemyUnit : HumanoidUnit
                     {
                         Debug.Log("Changing to Attacking State");
                         SetState(UnitState.Attacking);
-                        StopMovement();
                     }
                     else
                     {

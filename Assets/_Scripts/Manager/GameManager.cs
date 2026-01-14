@@ -78,6 +78,18 @@ public class GameManager : SingertonManager<GameManager>
     {
         if (unit.IsPlayer)
         {
+            if (m_PlacementProcess != null)
+            {
+                CancelBuildPlacement();
+            }
+
+            if (ActiveUnit == unit)
+            {
+                ClearActionBarUI();
+                ActiveUnit.Deselect();
+                ActiveUnit = null;
+            }
+
             m_PlayerUnits.Remove(unit);
         }
         else
