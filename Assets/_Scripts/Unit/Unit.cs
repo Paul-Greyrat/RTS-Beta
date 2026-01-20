@@ -81,8 +81,6 @@ public abstract class Unit : MonoBehaviour
         {
             m_AIPawn.OnNewPositionSelected -= TurnToPosition;
         }
-
-        UnregisterUnit();
     }
 
     public void SetTask(UnitTask task)
@@ -122,6 +120,11 @@ public abstract class Unit : MonoBehaviour
     {
         UnHighlight();
         IsTargeted = false;
+    }
+
+    public void StopMovement()
+    {
+        m_AIPawn.Stop();
     }
 
     public Vector3 GetTopPosition()
@@ -170,6 +173,8 @@ public abstract class Unit : MonoBehaviour
 
     protected virtual bool TryAttackCurrentTarget()
     {
+        if (Target.CurrentState == UnitState.Dead) return false;
+
         if (Time.time >= m_NextAutoAttackTime)
         {
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
@@ -189,6 +194,7 @@ public abstract class Unit : MonoBehaviour
     {
         SetState(UnitState.Dead);
         RunDeadEffects();
+        UnregisterUnit();
     }
 
     protected virtual void TakeDamage(int damage, Unit damager)
@@ -213,7 +219,14 @@ public abstract class Unit : MonoBehaviour
 
         if (target != null)
         {
-            target.TakeDamage(damage, this);
+            if (target.CurrentState == UnitState.Dead)
+            {
+                SetTarget(null);
+            }
+            else
+            {
+                target.TakeDamage(damage, this);
+            }
         }
     }
 

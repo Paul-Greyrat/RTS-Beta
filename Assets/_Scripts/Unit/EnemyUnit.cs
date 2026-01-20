@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+
+
 using UnityEngine;
 
 public class EnemyUnit : HumanoidUnit
 {
-    public override bool IsPlayer => false;
     private float m_AttackCommitmentTime = 1f;
     private float m_CurrentAttackCommitmentTime = 0;
+    public override bool IsPlayer => false;
 
     protected override void UpdateBehaviour()
     {
-
         switch (CurrentState)
         {
             case UnitState.Idle:
@@ -19,8 +18,8 @@ public class EnemyUnit : HumanoidUnit
                 {
                     if (IsTargetInRange(Target.transform))
                     {
-                        Debug.Log("Changing to Attacking State");
                         SetState(UnitState.Attacking);
+                        StopMovement();
                     }
                     else
                     {
@@ -35,8 +34,8 @@ public class EnemyUnit : HumanoidUnit
                         MoveTo(foe.transform.position);
                     }
                 }
-                break;
 
+                break;
             case UnitState.Attacking:
                 if (HasTarget)
                 {
@@ -58,9 +57,7 @@ public class EnemyUnit : HumanoidUnit
                 {
                     SetState(UnitState.Idle);
                 }
-
                 break;
         }
-    } 
+    }
 }
- 
