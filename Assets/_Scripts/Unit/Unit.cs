@@ -23,7 +23,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_AutoAttackFrequency = 1.5f;
     [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
     [SerializeField] protected int m_AutoAttackDamage = 7;
-    [SerializeField] protected int m_Health = 100; 
+    [SerializeField] protected int m_Health = 100;
+    [SerializeField] protected Color m_DamageFlashColor = new Color(1f, 0.27f, 0.25f, 1f);
 
     public bool IsTargeted;
     protected GameManager m_GameManager;
@@ -207,10 +208,20 @@ public abstract class Unit : MonoBehaviour
             GetTopPosition()
         );
 
+        StartCoroutine(FlashEffect(0.2f, m_DamageFlashColor));
+
         if (m_CurrentHealth <= 0)
         {
             Die();
         }
+    }
+
+    protected IEnumerator FlashEffect(float duration, Color flashColor)
+    {
+        Color originalColor = m_SpriteRenderer.color;
+        m_SpriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(duration);
+        m_SpriteRenderer.color = originalColor;
     }
 
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
