@@ -16,6 +16,8 @@ public class GameManager : SingertonManager<GameManager>
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToMovePrefabs;
     [SerializeField] private PointToClick m_PointToBuildPrefabs;
+    [SerializeField] private PointToClick m_PointToAttackPrefabs;
+
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
     [SerializeField] private TextPobupController m_TextPopupController;
@@ -160,6 +162,10 @@ public class GameManager : SingertonManager<GameManager>
             {
                 HandleClickOnPlayerUnit(unit);
             }
+            else
+            {
+                HandleClickOnEnemyUnit(unit);
+            }
         }
         else
         {
@@ -267,6 +273,10 @@ public class GameManager : SingertonManager<GameManager>
         else if (clickType == ClickType.Build)
         {
             Instantiate(m_PointToBuildPrefabs, (Vector3)worldPoint, Quaternion.identity);
+        }
+        else if (clickType == ClickType.Attack)
+        {
+            Instantiate(m_PointToAttackPrefabs, (Vector3)worldPoint, Quaternion.identity);
         }
     }
 

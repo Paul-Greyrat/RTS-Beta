@@ -82,6 +82,7 @@
     <Compile Include="Assets\_Scripts\Ui\ActionButton.cs" />
     <Compile Include="Assets\_Scripts\Ui\PointToClick.cs" />
     <Compile Include="Assets\_Scripts\Unit\HumanoidUnit.cs" />
+    <Compile Include="Assets\_Scripts\Unit\SoldierUnit.cs" />
     <Compile Include="Assets\_Scripts\AI\Pathfinding.cs" />
     <Compile Include="Assets\_Scripts\Utils\TextPobup.cs" />
     <Compile Include="Assets\_Scripts\Ui\ResourceRequirementDisplay.cs" />
