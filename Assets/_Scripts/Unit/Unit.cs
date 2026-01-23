@@ -208,7 +208,7 @@ public abstract class Unit : MonoBehaviour
             GetTopPosition()
         );
 
-        StartCoroutine(FlashEffect(0.2f, m_DamageFlashColor));
+        StartCoroutine(FlashEffect(0.2f, 2, m_DamageFlashColor));
 
         if (m_CurrentHealth <= 0)
         {
@@ -216,12 +216,19 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    protected IEnumerator FlashEffect(float duration, Color flashColor)
+    protected IEnumerator FlashEffect(float duration, float FlashCount, Color flashColor)
     {
         Color originalColor = m_SpriteRenderer.color;
-        m_SpriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(duration);
-        m_SpriteRenderer.color = originalColor;
+        for (int i = 0; i < FlashCount; i++)
+        {
+            m_SpriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(duration /2f);
+
+            m_SpriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(duration /2f);
+
+        }
+
     }
 
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)

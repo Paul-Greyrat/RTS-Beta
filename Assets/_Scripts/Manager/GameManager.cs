@@ -208,6 +208,18 @@ public class GameManager : SingertonManager<GameManager>
         SelectNewUnit(unit);
     }
 
+    void HandleClickOnEnemyUnit(Unit EnemyUnit)
+    {
+        if (hasActiveunit)
+        {
+            ActiveUnit.SetTarget(EnemyUnit);
+            ActiveUnit.MoveTo(EnemyUnit.transform.position);
+            ActiveUnit.SetState(UnitState.Attacking);
+            DisplayClickEffect(EnemyUnit.GetTopPosition(), ClickType.Attack);
+
+        }
+    }
+
     bool WorkerClickedUnFinishedBuiding(Unit Clickedunit)
     {
         return
