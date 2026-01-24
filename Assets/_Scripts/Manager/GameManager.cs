@@ -219,8 +219,7 @@ public class GameManager : SingertonManager<GameManager>
         if (hasActiveunit)
         {
             ActiveUnit.SetTarget(EnemyUnit);
-            ActiveUnit.MoveTo(EnemyUnit.transform.position);
-            ActiveUnit.SetState(UnitState.Attacking);
+            ActiveUnit.SetTask(UnitTask.Attack);
             DisplayClickEffect(EnemyUnit.GetTopPosition(), ClickType.Attack);
 
         }
@@ -369,3 +368,4 @@ public class GameManager : SingertonManager<GameManager>
     }
 
 }
+
