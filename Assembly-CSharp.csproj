@@ -64,6 +64,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.40f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Scripts\Unit\Actions\UnitStanceActionSO.cs" />
     <Compile Include="Assets\_Scripts\Unit\Unit.cs" />
     <Compile Include="Assets\_Scripts\Utils\GreyUtils.cs" />
     <Compile Include="Assets\_Scripts\Manager\SingertonManager.cs" />
